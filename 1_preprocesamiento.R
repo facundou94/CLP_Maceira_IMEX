@@ -8,6 +8,7 @@
 #
 #
 library(here)
+library(dplyr)
 library(readBrukerFlexData)
 library(MALDIquant)
 library(MALDIquantForeign)
@@ -20,7 +21,8 @@ library(stringr)
 #
 # Creación de la ruta relativa de los archivos
 #
-ruta_proyecto <- here("OneDrive","Documents","Proyectos RStudio","Maceira_CLP","Datos CLP-SHAM D1-2-4-7")
+#ruta_proyecto <- here("OneDrive","Documents","Proyectos RStudio","Maceira_CLP","Datos CLP-SHAM D1-2-4-7")
+ruta_proyecto <- here("Datos CLP-SHAM D1-2-4-7")
 ruta_datos <- file.path(ruta_proyecto)
 #
 # Importar espectros
@@ -134,7 +136,7 @@ df_metadata_f1 <- sc.results$fmeta # Filtramos metadatos
 thScale <- 10 # Smoothing
 #smoothLevel <- 4 # Wavelet smoothing level
 ite <- 105 # Baseline correction
-SigNoi <- 2 # Peak extraction
+SigNoi <- 2.5 # Peak extraction
 hws <- 20 # Peak extraction
 tol <- 0.03 # Peak binning
 #
@@ -142,23 +144,23 @@ tol <- 0.03 # Peak binning
 # utiliza los parámetros definidos anteriormente
 #
 Spectra_list_f1 <- transfIntensity(Spectra_list_f1, fun = sqrt)
-plot(Spectra_list_f1[[20]])
+plot(Spectra_list_f1[[30]])
 Spectra_list_f1 <- wavSmoothing(Spectra_list_f1, method = "Wavelet", n.levels = 4)
-plot(Spectra_list_f1[[20]])
+plot(Spectra_list_f1[[30]])
 #spectra <- wavSmoothing(spectra, method = "Wavelet", n.levels = smoothLevel)
 #
 # Detección de la linea de base
 #
-baseline <- estimateBaseline(Spectra_list_f1[[20]], method = "SNIP",
+baseline <- estimateBaseline(Spectra_list_f1[[30]], method = "SNIP",
                              iterations = ite)
-plot(Spectra_list_f1[[20]])
+plot(Spectra_list_f1[[30]])
 lines(baseline, col="red", lwd=2)
 #
 #
 Spectra_list_f2 <- removeBaseline(Spectra_list_f1, method = "SNIP", iterations = ite)
-plot(Spectra_list_f2[[20]])
+plot(Spectra_list_f2[[30]])
 Spectra_list_f2 <- calibrateIntensity(Spectra_list_f2, method = "PQN")
-plot(Spectra_list_f2[[20]])
+plot(Spectra_list_f2[[30]])
 
 Spectra_list_f3 <- alignSpectra(Spectra_list_f2,
                                 halfWindowSize=20,
@@ -166,22 +168,113 @@ Spectra_list_f3 <- alignSpectra(Spectra_list_f2,
                                 tolerance=0.02, #Ojo, ver parámetros
                                 warpingMethod="lowess")
 #
-plot(Spectra_list_f3[[20]])
+plot(Spectra_list_f3[[30]])
 #
-### OJO !!!!
+#Por control empírico
+indices_a_preservar <- c(1:296, 299)
+Spectra_list_f3 <- Spectra_list_f3[indices_a_preservar]
+df_metadata_f1 <- df_metadata_f1 %>% 
+  slice(indices_a_preservar)
+### CHEQUEADO TODO OK ####
 # for (i in 1:length(Spectra_list_f3)) {
-#   valor1 <- Spectra_list_f3[[i]]@metaData$sampleName
-#   valor2 <- Spectra_list_f3[[i]]@metaData$factor3
-#   print(valor1) #Ambos n de muestra deben coincidir
-#   print(valor2)
-# }
-# 
+#    valor1 <- Spectra_list_f3[[i]]@metaData$factor3
+#    valor2 <- df_metadata_f1$factor3[i]
+#    print(valor1) #Ambos n de muestra deben coincidir
+#    print(valor2)
+#  }
+#  
 # #Buscador de indices
-# #for (i in 1:length(SL_transformado)) {
-# #  if (SL_transformado[[i]]@metaData$muestra == 101)
-# #  print(i)
-# #}
+# for (i in 1:length(SL_transformado)) {
+#  if (SL_transformado[[i]]@metaData$muestra == 101)
+#    print(i)
+# }
+#
+#
+####### PROMEDIO DE LECTURAS DE UNA MISMA WELL ##########################################################
+#
+# Etiquetas para primer factor de agrupamiento (Muestra de paciente)
+#
+Spectra_list_prom_rep <- averageMassSpectra(Spectra_list_f3,
+                                      labels = factor(df_metadata_f1$factor3), 
+                                      method = "mean")
+#
+#
+plot(Spectra_list_prom_rep[[122]])
+# Creo la nueva metadata de los espectros promediados
+#
+#
+df_metadata_prom_rep <- df_metadata_f1 %>% 
+  distinct(factor3, .keep_all = TRUE)
+#
+#
+# Parte de relacion señal a ruido
+#
+noise <- estimateNoise(Spectra_list_prom_rep[[122]])
+plot(Spectra_list_prom_rep[[122]], xlim=c(4000, 20000), ylim=c(0, 0.0005))
+lines(noise, col="red")
+lines(noise[,1], noise[, 2]*2, col="blue") # Se ve que es correcto el 2
+#
+#
+####### EXTRACCIÓN DE PICOS Y ALINEACIÓN ###############################################################
+#
+peaks <- detectPeaks(Spectra_list_prom_rep, 
+                     SNR = SigNoi, 
+                     halfWindowSize = 40)
 
+plot(Spectra_list_prom_rep[[122]], xlim=c(4000, 20000), ylim=c(0, 0.0005))
+points(peaks[[122]], col="red", pch=4)
+
+
+peaks <- alignPeaks(peaks, 
+                    minFreq = 0.8, 
+                    tolerance = tol)
+
+summaryPeaks(peaks[1:10])  # resumen estadistico de picos (primeros 10)
+#
+#
+## conteo de picos por perfil
+#
+cP <- countPeaks(peaks)
+#
+# gráfico
+#
+plot(cP, type = "n")
+text(cP, label = 1:length(cP)) # Se encuentran muestras 123 y 122 extrañas
+#
+#
+## Patrones de picos
+
+peakPatterns(peaks)
+
+## Filtrado de picos de baja frecuencia de aparición
+
+picos_filtrados <- filterPeaks(peaks, 
+                               minFreq = 0.25, 
+                               labels = df_metadata_prom_rep$factor1 ) #EVALUAR QUE PARÁMETRO DE FILTRADO USAR
+#OJO CON ESO,id paciente es mejor, pero pierdo info?
+
+peakPatterns(picos_filtrados)
+
+## conteo de picos por perfil
+#
+cP2 <- countPeaks(picos_filtrados)
+#
+# gráfico
+#
+plot(cP2, type = "n")
+text(cP2, label = 1:length(cP2)) # Se encuentran muestras 123 y 122 extrañas
+#
+#
+#
+# Fusion de picos de la misma muestra (!!! me quedo con pocas muestras)
+
+picos_fusion_muestra <- mergeMassPeaks(picos_filtrados, 
+                                       labels = df_metadata_prom_rep$factor2, 
+                                       method = "median")
+peakPatterns(picos_fusion_muestra)
+#
+#
+### CREACIÓN DE METADATA Y MATRICES FINALES #########################################
 
 
 
