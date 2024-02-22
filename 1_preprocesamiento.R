@@ -1,5 +1,5 @@
 ################ MALDI-TOF ANALISIS CLP #####################################################################################
-##
+################ 1) PREPROCESAMIENTO  #######################################################################################
 ##
 ## Autor: Bioing. Facundo Urteaga (IBB-CONICET)
 ##
@@ -7,6 +7,7 @@
 ##################### CARGA DE LIBRERIAS ####################################################################################
 #
 #
+library(binda)
 library(here)
 library(dplyr)
 library(readBrukerFlexData)
@@ -198,6 +199,13 @@ Spectra_list_prom_rep <- averageMassSpectra(Spectra_list_f3,
                                       labels = factor(df_metadata_f1$factor3), 
                                       method = "mean")
 #
+# Agrupamiento a muestras únicas
+#
+#
+Spectra_list_prom_muestra <- averageMassSpectra(Spectra_list_prom_rep,
+                                            labels = factor(df_metadata_prom_rep$factor2), 
+                                            method = "mean")
+#
 #
 plot(Spectra_list_prom_rep[[122]])
 # Creo la nueva metadata de los espectros promediados
@@ -251,10 +259,19 @@ peakPatterns(peaks)
 picos_filtrados <- filterPeaks(peaks, 
                                minFreq = 0.25, 
                                labels = df_metadata_prom_rep$factor1 ) #EVALUAR QUE PARÁMETRO DE FILTRADO USAR
-#OJO CON ESO,id paciente es mejor, pero pierdo info?
-
+#
+#
+# Metadata de picos filtrados
+#
+# 
+df_metadata_unicas <- df_metadata_prom_rep %>% 
+  distinct(factor2, .keep_all = TRUE)
+#
+#
 peakPatterns(picos_filtrados)
-
+#
+#
+#
 ## conteo de picos por perfil
 #
 cP2 <- countPeaks(picos_filtrados)
@@ -274,11 +291,60 @@ picos_fusion_muestra <- mergeMassPeaks(picos_filtrados,
 peakPatterns(picos_fusion_muestra)
 #
 #
-### CREACIÓN DE METADATA Y MATRICES FINALES #########################################
+### CREACIÓN DE MATRIZ DE INTENSIDADES Y DICOTÓMICA #########################################
+#
+#
+## Matriz de intensidades
+#
+#matint_na_122 <- intensityMatrix(picos_filtrados) # con valores NA
+matint_122 <- intensityMatrix(picos_filtrados, Spectra_list_prom_rep) # sin valores NA
+#
+#matint_na_51 <- intensityMatrix(picos_fusion_muestra) # con valores NA
+matint_51 <- intensityMatrix(picos_fusion_muestra, Spectra_list_prom_muestra) # sin valores NA
+#
+#
+# Definición de umbrales
+#
+#
+thr1 <- optimizeThreshold(matint_122, #CHEQUEAR QUE USO
+                         df_metadata_prom_rep$tipo, 
+                         verbose = T)
 
+matint_122_dico <- dichotomize(matint_122, thr1)
+#
+thr2 <- optimizeThreshold(matint_51, #CHEQUEAR QUE USO
+                          df_metadata_unicas$tipo, 
+                          verbose = T)
 
+matint_51_dico <- dichotomize(matint_51, thr2)
+#
 
+# Datos de pseudoréplicas (122)
+#
+#
+#
+# Datos de muestras únicas (51)
 
-
-
+rownames(matint_122_dico) <- df_metadata_prom_rep$factor3
+rownames(matint_51_dico) <- df_metadata_unicas$factor2
+rownames(matint_122) <- df_metadata_prom_rep$factor3
+rownames(matint_51) <- df_metadata_unicas$factor2
+#
+#
+############################### GUARDAR DATOS #########################################
+#
+save(matint_122_dico,df_metadata_prom_rep, file = "matint_122_dico.Rdata")
+save(matint_51_dico, df_metadata_unicas, file = "matint_51_dico.Rdata")
+save(matint_122,df_metadata_prom_rep, file = "matint_122.Rdata")
+save(matint_51, df_metadata_unicas, file = "matint_51.Rdata")
+#
+#
+write.csv(matint_122_dico, "matint_122_dico.csv", row.names = TRUE)
+write.csv(matint_122, "matint_122.csv", row.names = TRUE)
+write.csv(matint_51_dico, "matint_51_dico.csv", row.names = TRUE)
+write.csv(matint_51, "matint_51.csv", row.names = TRUE)
+#
+#
+write.csv(df_metadata_prom_rep, "df_122.csv", row.names = TRUE)
+write.csv(df_metadata_unicas, "df_51.csv", row.names = TRUE)
 
