@@ -210,3 +210,5 @@ graficos_dias <- lapply(unique(datos_grafico_dias$Dia), function(d) {
 
 # Mostrar los gráficos
 grid.arrange(grafico_general, grobs = graficos_dias, ncol = 2, top = "Tasa de Acierto por Día y Total")
+
+plot(grafico_general)
