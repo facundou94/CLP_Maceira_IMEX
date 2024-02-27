@@ -1,12 +1,17 @@
-################ MALDI-TOF ANALISIS CLP #####################################################################################
-################ 2) SUPERVISADO    #######################################################################################
-##
-## Autor: Bioing. Facundo Urteaga (IBB-CONICET)
-##
-##
-##################### CARGA DE LIBRERIAS ####################################################################################
+################ MALDI-TOF ANALISIS CLP ########################################
+################ 2) s_m122_d1247  #############################################
+#
+# s:     Supervisado
+# m122:  Utiliza las wells (122 muestras)
+# d1247: Utiliza todos los días de lectura para los análisis
+#
+# Autor: Bioing. Facundo Urteaga (IBB-CONICET)
 #
 #
+### CARGA DE LIBRERIAS #########################################################
+################################################################################
+
+
 library(tidyverse)
 library(crossval)
 library(binda)
@@ -14,81 +19,76 @@ library(caret)
 library(pROC)
 library(ranger)
 library(klaR)
-#
-##################### CARGA DE DATOS ####################################################################################
-#
-#
-#script_path <- "C:/Users/Facundo/Documents/Proyectos/Data"
-#setwd(script_path) session -> set working directory
+
+
+### CARGA DE ARCHIVOS ##########################################################
+################################################################################
+
+
+#setwd(script_path) o session -> set working directory -> carpeta data
 load("matint_122.Rdata")
 load("matint_122_dico.Rdata")
-#
-### Machine learning analysis ### 
-#
-### Train/test splits
-#
+
+### ANÁLISIS DE MACHINE LEARNING ###############################################
+################################################################################
+
+
+# Train/test splits
 etiqueta <- df_metadata_prom_rep %>% pull(tipo)
 etiqueta <- factor(etiqueta)
-#
 rownames(matint_122_dico) <- etiqueta
-#
+
 set.seed(123) # semilla para reproducibilidad
-#
+
 ind <- sample(2, nrow(matint_122_dico), replace = TRUE, 
               prob = c(0.6, 0.4))
-#
+
+# Separo en datos de entrenamiento y de testeo
 Train <- matint_122_dico[ind == 1, ] 
 Test <- matint_122_dico[ind == 2, ]
-#
 Ytrain1 <- rownames(Train)
 Ytest1 <- rownames(Test)
 Ytrain1 <- as.factor(Ytrain1)
 Ytest1 <- as.factor(Ytest1)
-#
-#
-## Binda
-#
-#
+
+# Binda
+
+# Binda ranking
 tipo <- df_metadata_prom_rep %>% pull(tipo)
-#
 br <- binda.ranking(matint_122_dico, tipo, verbose = FALSE)
-top20 <- br[1:20]
-#
+top20 <- br[1:20] #Uso el top20
+
 tipo <- data.frame(tipo = tipo)
 datos <- cbind(data.frame(matint_122_dico), tipo)
-#
+
 set.seed(1)
 ind <- sample(2, nrow(datos), replace = TRUE, 
               prob = c(0.6, 0.4))
-#
+
 Train <- datos[ind == 1, ] 
 Test <- datos[ind == 2, ]
-#
+
 Train %>% count(tipo)
 Test %>% count(tipo)
-#
-#
+
 Train <- Train[, c(top20, 219)]
 Test <- Test[, c(top20, 219)]
-#
-#
-#
-#
+
 particiones  <- 10
 repeticiones <- 5
-#
+
 hiperparametros <- data.frame(lambda.freqs = c(0, 0.25, 0.5, 0.75, 1))
-#
+
 set.seed(123)
-#
+
 seeds <- vector(mode = "list", length = (particiones * repeticiones) + 1)
-#
+
 for (i in 1:(particiones * repeticiones)) {
   seeds[[i]] <- sample.int(1000, nrow(hiperparametros)) 
 }
-#
+
 seeds[[(particiones * repeticiones) + 1]] <- sample.int(1000, 1)
-#
+
 control_train <- trainControl(method = "repeatedcv", 
                               number = particiones,
                               repeats = repeticiones, 
@@ -98,11 +98,11 @@ control_train <- trainControl(method = "repeatedcv",
                               verboseIter = FALSE,
                               summaryFunction = twoClassSummary
 )
-#
+
 set.seed(342)
 Train_x = data.frame(Train[, -21])
 Train_y = as.factor(Train[, 21])
-#
+
 modelo_binda <- train(Train_x, Train_y,
                       method = "binda",
                       metric = "Accuracy",
@@ -114,36 +114,36 @@ Test_y = as.factor(Test[, 21])
 pred.cv <- predict(modelo_binda, 
                    newdata = Test_x,
                    type = "prob")
-#
-#
+
+
 r_bda <- roc(response = factor(Test_y), 
              predictor = pred.cv$CLP,
              levels = c("CLP", "SH")) 
-#
-auc(r_bda)
-#
-ci.auc(r_bda)
-#
-plot.roc(r_bda, print.auc=T,
-         col="blue",xlab="1-ESpecificidad",ylab="Sensibilidad")
 
-#
-## Random forest
-#
+auc(r_bda)
+
+ci.auc(r_bda)
+
+plot.roc(r_bda, print.auc=T,
+         col="blue",xlab="1-Especificidad",ylab="Sensibilidad")
+title("Curva ROC para Binda")
+
+# Random forest
+
 particiones  <- 10
 repeticiones <- 5
-#
+
 hiperparametros <- expand.grid(mtry = c(3, 4, 5, 7),
                                min.node.size = c(2, 3, 4, 5, 10, 15, 20, 30),
                                splitrule = "gini")
-#
+
 set.seed(123)
 seeds <- vector(mode = "list", length = (particiones * repeticiones) + 1)
 for (i in 1:(particiones * repeticiones)) {
   seeds[[i]] <- sample.int(1000, nrow(hiperparametros))
 }
 seeds[[(particiones * repeticiones) + 1]] <- sample.int(1000, 1)
-#
+
 control_train <- trainControl(method = "repeatedcv", 
                               number = particiones,
                               repeats = repeticiones, 
@@ -153,7 +153,6 @@ control_train <- trainControl(method = "repeatedcv",
                               verboseIter = FALSE,
                               allowParallel = TRUE,
                               summaryFunction = twoClassSummary)
-
 
 modelo_rf <- train(Train_x, Train_y,
                    method = "ranger",
@@ -181,7 +180,8 @@ auc(r_rf)
 ci.auc(r_rf)
 
 plot.roc(r_rf, print.auc=T,
-         col="blue",xlab="1-ESpecificidad",ylab="Sensibilidad")
+         col="blue",xlab="1-Especificidad",ylab="Sensibilidad")
+title("Curva ROC para random forest")
 
 ## kNN
 
@@ -228,12 +228,10 @@ auc(r_knn)
 ci.auc(r_knn)
 
 plot.roc(r_knn, print.auc=T,
-         col="blue",xlab="1-ESpecificidad",ylab="Sensibilidad")
+         col="blue",xlab="1-Especificidad",ylab="Sensibilidad")
+title("Curva ROC para KNN")
 
-
-## Naive Bayes probe y no anduvo pero no sé si se aplica
-
-## SVM (radial)
+# SVM (radial)
 
 particiones  <- 10
 repeticiones <- 5
@@ -281,5 +279,7 @@ auc(r_svm)
 ci.auc(r_svm)
 
 plot.roc(r_svm, print.auc=T,
-         col="blue",xlab="1-ESpecificidad",ylab="Sensibilidad")
+         col="blue",xlab="1-Especificidad",ylab="Sensibilidad")
+
+title("Curva ROC para SVM")
 
