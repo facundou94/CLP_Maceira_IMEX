@@ -1,5 +1,5 @@
 ################ MALDI-TOF ANALISIS CLP ########################################
-################ 2) s_m122_d1247  #############################################
+################ 3) s_m122_d1247  #############################################
 #
 # s:     Supervisado
 # m122:  Utiliza las wells (122 muestras)
@@ -51,7 +51,9 @@ Ytest1 <- rownames(Test)
 Ytrain1 <- as.factor(Ytrain1)
 Ytest1 <- as.factor(Ytest1)
 
-# Binda
+
+### BINDA ######################################################################
+
 
 # Binda ranking
 tipo <- df_metadata_prom_rep %>% pull(tipo)
@@ -126,9 +128,10 @@ ci.auc(r_bda)
 
 plot.roc(r_bda, print.auc=T,
          col="blue",xlab="1-Especificidad",ylab="Sensibilidad")
-title("Curva ROC para Binda")
 
-# Random forest
+
+### RANDOM FOREST ##############################################################
+
 
 particiones  <- 10
 repeticiones <- 5
@@ -181,9 +184,10 @@ ci.auc(r_rf)
 
 plot.roc(r_rf, print.auc=T,
          col="blue",xlab="1-Especificidad",ylab="Sensibilidad")
-title("Curva ROC para random forest")
 
-## kNN
+
+### kNN ########################################################################
+
 
 particiones  <- 10
 repeticiones <- 5
@@ -229,9 +233,10 @@ ci.auc(r_knn)
 
 plot.roc(r_knn, print.auc=T,
          col="blue",xlab="1-Especificidad",ylab="Sensibilidad")
-title("Curva ROC para KNN")
 
-# SVM (radial)
+
+### SVM RADIAL #################################################################
+
 
 particiones  <- 10
 repeticiones <- 5
@@ -281,5 +286,34 @@ ci.auc(r_svm)
 plot.roc(r_svm, print.auc=T,
          col="blue",xlab="1-Especificidad",ylab="Sensibilidad")
 
-title("Curva ROC para SVM")
 
+### GRÁFICO DE TODAS LAS CURVAS ################################################
+
+
+# Dibuja las curvas ROC para cada clasificador
+plot.roc(r_svm, col = "blue4", xlab = "1-Especificidad", ylab = "Sensibilidad")
+plot.roc(r_knn, col = "red4", add = TRUE)
+plot.roc(r_bda, col = "green4", add = TRUE)
+plot.roc(r_rf, col = "yellow4", add = TRUE)
+
+# Muestra el valor del AUC para cada clasificador en una ubicación deseada
+text(0.0, 0.7, labels = paste("AUC (SVM) =", round(auc(r_svm), 2)), 
+     pos = 1, offset = 0.5, col = "blue4")
+text(0.1, 0.6, labels = paste("AUC (KNN) =", round(auc(r_knn), 2)), 
+     pos = 1, offset = 0.5, col = "red4")
+text(0.2, 0.5, labels = paste("AUC (BDA) =", round(auc(r_bda), 2)), 
+     pos = 1, offset = 0.5, col = "green4")
+text(0.3, 0.4, labels = paste("AUC (RF) =", round(auc(r_rf), 2)), 
+     pos = 1, offset = 0.5, col = "yellow4")
+
+# Añade la leyenda
+legend("bottomright", legend = c("ROC SVM", "ROC KNN", "ROC BDA", "ROC RF"), 
+       col = c("blue4", "red4", "green4", "yellow4"), lwd = 2)
+title("Curvas ROC para Clasificadores", line = 2.5)
+
+
+#
+#
+#
+### FIN ########################################################################
+################################################################################
