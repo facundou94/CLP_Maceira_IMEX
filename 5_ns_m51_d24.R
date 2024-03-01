@@ -3,7 +3,7 @@
 #
 # ns:    No Supervisado
 # m51:  Utiliza las muestras (51)
-# d1247: Utiliza los días 2 y 4
+# d24: Utiliza los días 2 y 4
 #
 # Autor: Bioing. Facundo Urteaga (IBB-CONICET)
 #
@@ -33,8 +33,10 @@ library(factoextra)
 #script_path <- "C:/Users/Facundo/Documents/Proyectos/Data"
 #setwd(script_path) session -> set working directory
 load("matint_51_dico.Rdata")
-df_metadata_unicas$dia <- as.integer(gsub("[^0-9]", "", df_metadata_unicas$dia))
+load("matint_51.Rdata")
 
+df_metadata_unicas$dia <- as.integer(gsub("[^0-9]", "", 
+                                          df_metadata_unicas$dia))
 
 # Filtrado de muestras de día 2 y día 4 y agrupo los SH
 filas_filtradas <- rownames(matint_51_dico)[grepl("D2|D4", rownames(matint_51_dico))]
@@ -42,7 +44,11 @@ matint_51_dico_d2d4 <- matint_51_dico[filas_filtradas, ]
 df_unicas_d2d4 <- df_metadata_unicas %>%
   dplyr::filter(dia == 2 | dia == 4)
 df_unicas_d2d4 <- df_unicas_d2d4 %>%
-  mutate(factor1 = ifelse(grepl("SH", factor1), "SH", factor1)) 
+  mutate(factor1 = ifelse(grepl("SH", factor1), "SH", factor1))
+
+filas_filtradas <- rownames(matint_51)[grepl("D2|D4", rownames(matint_51))]
+matint_51_d2d4 <- matint_51[filas_filtradas, ]
+
 
 
 ### SELECCIÓN DE PICOS #########################################################

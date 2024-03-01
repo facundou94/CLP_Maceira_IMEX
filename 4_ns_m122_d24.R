@@ -42,6 +42,8 @@ df_metadata_prom_rep$dia <- as.integer(gsub("[^0-9]", "",
 # Filtrado de muestras de día 2 y día 4
 filas_filtradas <- rownames(matint_122_dico)[grepl("D2|D4", rownames(matint_122_dico))]
 matint_122_dico_d2d4 <- matint_122_dico[filas_filtradas, ]
+filas_filtradas <- rownames(matint_122)[grepl("D2|D4", rownames(matint_122))]
+matint_122_d2d4 <- matint_122[filas_filtradas, ]
 
 df_prom_rep_d2d4 <- df_metadata_prom_rep %>% dplyr::filter(dia == 2 | dia == 4)
 
@@ -333,7 +335,7 @@ optimalScores(comparacion)
 
 
 # Con top30: PAM CLUSTERING 3 clusters
-top_actual <- br[1:30]
+top_actual <- top.b30
 K.num <- 3 # clusters
 var2 = 0.95
 
@@ -363,6 +365,15 @@ cluster.pam.top30.k4.g3 <- cluster.pam.top30.k4.g3 +
 print(cluster.pam.top30.k4.g3)
 
 
+### EXPORTAR MATRICES CON 30 PICOS DE INTERÉS ##################################
+################################################################################
+
+
+
+write.csv(matint_122_dico_d2d4[, top_actual], "top15_107_dico_d24.csv",
+          row.names = TRUE)
+write.csv(matint_122_d2d4[, top_actual], "top15_107_d24.csv", row.names = TRUE)
+write.csv(df_prom_rep_d2d4, "metadata_107.csv", row.names = TRUE)
 #
 #
 #
