@@ -29,6 +29,8 @@
 
 ## Descripción del proyecto
 
+<img src='Imagenes/1_pre_crudo.jpeg' width='500'>
+
 ## Característica de las muestras
 
 ## Pre-procesamiento
