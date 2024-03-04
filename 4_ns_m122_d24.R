@@ -370,9 +370,9 @@ print(cluster.pam.top30.k4.g3)
 
 
 
-write.csv(matint_122_dico_d2d4[, top_actual], "top15_107_dico_d24.csv",
+write.csv(matint_122_dico_d2d4[, top_actual], "top30_107_dico_d24.csv",
           row.names = TRUE)
-write.csv(matint_122_d2d4[, top_actual], "top15_107_d24.csv", row.names = TRUE)
+write.csv(matint_122_d2d4[, top_actual], "top30_107_d24.csv", row.names = TRUE)
 write.csv(df_prom_rep_d2d4, "metadata_107.csv", row.names = TRUE)
 #
 #
