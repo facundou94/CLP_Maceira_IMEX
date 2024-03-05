@@ -7,23 +7,15 @@
 
 ## Índice
 
-*[Título e imagen de portada](#título-e-imagen-de-portada)
-
-*[Insignias](#insignias)
-
-*[Índice](#índice)
-
 *[Descripción del proyecto](#descripción-del-proyecto)
 
-*[Característica de las muestras](#características-de-las-muestras)
+*[Características de las muestras](#características-de-las-muestras)
 
 *[Pre-procesamiento](#pre-procesamiento)
 
-*[Algoritmos No Supervisados en R](#algoritmos-No-Supervisados-en-R)
+*[Algoritmos no supervisados](#algoritmos-no-supervisados)
 
-*[Algoritmos Supervisados en R](#algoritmos-Supervisados-en-R)
-
-*[Algoritmos Supervisados en Python](#algoritmos-Supervisados-en-Python)
+*[Algoritmos supervisados](#algoritmos-supervisados)
 
 *[Conclusión](#conclusión)
 
@@ -31,14 +23,12 @@
 
 <img src='Imagenes/1_pre_crudo.jpeg' width='500'>
 
-## Característica de las muestras
+## Características de las muestras
 
 ## Pre-procesamiento
 
-## Algoritmos No Supervisados en R
+## Algoritmos No Supervisados
 
-## Algoritmos Supervisados en R
-
-## Algoritmos Supervisados en Python
+## Algoritmos Supervisados
 
 ## Conclusión
