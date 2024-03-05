@@ -40,22 +40,47 @@ x_alg_muestras_dias
 
 Donde
 
-x: numeración
-alg: algoritmos utilizados, supervisados (s) o no supervisados (ns)
-muestras: cantidad de muestras, indicando si se usan las réplicas biológicas (m122) o las muestras ya promediadas (m51)
-dias: días utilizados para el análisis, todos (d1247) o solo días 2 y 4 (d24)
+* x: numeración
+* alg: algoritmos utilizados, supervisados (s) o no supervisados (ns)
+* muestras: cantidad de muestras, indicando si se usan las réplicas biológicas (m122) o las muestras ya promediadas (m51)
+* dias: días utilizados para el análisis, todos (d1247) o solo días 2 y 4 (d24)
 
 ## Pre-procesamiento
 
-<img src='Imagenes/1_pre_crudo.jpeg' width='500'>
+### Archivo: 1_preprocesamiento.R
 
-<img src='Imagenes/1_pre_espectro_filtrado.jpeg' width='500'>
+El pre-procesamiento está compuesto por las siguientes etapas:
+* Carga de los espectros y su metadata correspondiente
+<p align="center">
+  <img src="Imagenes/1_pre_crudo.jpeg" width="400">
+</p>
+<p align="center">
+  <em>Figura 1: Espectro cargado sin transformar</em>
+</p>
+* Control de calidad de los espectros mediante el uso de un estimador robusto Q. A fines prácticos, este control de calidad filtra espectros ruidosos o con el espectro "planchado" debido al fenómeno de supresión iónica en la etapa de adquisición.
 
-<img src='Imagenes/1_pre_espectro_filtrado.jpeg' width='500'>
+* Transformación de los espectros. Transformación de intensidad mediante la función raíz cuadrada (sqrt), suavizado del espectro mediante la función "wavelet", detección y remoción de la linea de base y alineamiento de los espectros, en ese orden.
+</p>
+<p align="center">
+<img src='Imagenes/1_pre_baseline.jpg' width='400'>
+</p>
+<p align="center">
+  <em>Figura 2: Detección de la linea de base</em>
+</p>
+<p align="center">
+<img src='Imagenes/1_pre_baseline_removed.jpg' width='400'>
+</p>
+<p align="center">
+  <em>Figura 3: Espectro con la línea de base removida</em>
+</p>
+* Se realiza un promediado de las réplicas técnicas y biológicas.
+* Extracción de picos preponderantes de cada espectro. Esto se logra definiendo un umbral a partir del cual se comienzan a detectar los picos. Este umbral se define a partir de dos veces la relación señal a ruido del espectro (SNR).
+* A partir de la detección de los picos en cada espectro, se crea la matriz de intensidad, las cual contiene en sus filas las muestras y en las columnas los picos detectados. Esta matriz también es sujeta a transformaciones para preservar los picos con mayor frecuencia de aparición en los espectros y eliminar los picos "extraños", ya que lo que buscamos en esta instancia es que las variables (en este caso los picos) aporten información al sistema para su posterior análisis. Se crea también la matriz dicotómica, la cual se origina a partir de la definición de un umbral en la matriz de intensidades que transforma los valores de los picos en 1 y 0 segun la presencia o ausencia de cada pico en cada muestra.
+* Por último, guardar las matrices y los metadatos. Se obtienen matrices de intensidades y dicotómicas tanto para las muestras individuales (matriz de 51 filas x 218 columnas) como para las réplicas biológicas (matriz de 122 filas x 218 columnas)
 
-<img src='Imagenes/1_pre_baseline.jpeg' width='500'>
 
-<img src='Imagenes/1_pre_baseline_removed.jpeg' width='500'>
+
+
 
 ## Algoritmos No Supervisados
 
