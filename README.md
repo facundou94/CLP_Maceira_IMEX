@@ -145,7 +145,7 @@ Resultados:
    <img src='Imagenes/2_CLP_vs_SHAM_kmeans.jpg' width='400'>
    </p>
    <p align="center">
-     <em>Figura 8: Clustering - CLP vs SHAM - Días 1, 2, 4 y 7 - Algoritmo: kmeans</em>
+     <em>Figura 8: Clustering - CLP vs SHAM - Días 1, 2, 4 y 7 - TOP 20 picos - Algoritmo: kmeans</em>
    </p>
 
    <p align="center">
@@ -175,7 +175,14 @@ Resultados:
    <img src='Imagenes/4_hkmeans_4_grupos.jpg' width='400'>
    </p>
    <p align="center">
-     <em>Figura 12: Clustering - CLP vs SHAM - Días 2 y 4 - Algoritmo: Hkmeans</em>
+     <em>Figura 12: Clustering - CLP vs SHAM - Días 2 y 4 - TOP 30 picos - Algoritmo: Hkmeans</em>
+   </p>
+
+   <p align="center">
+   <img src='Imagenes/4_hkmeans_4_grupos.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 12: Clustering - CLP vs SHAM - Días 2 y 4 - TOP 30 picos - Algoritmo: Hkmeans</em>
    </p>
 
    ### Archivo: 5_ns_m51_d24
