@@ -34,12 +34,28 @@ El proyecto consiste en el procesamiento y análisis de espectros MALDI-TOF obte
 
 ## Características y nomenclatura de  los archivos
 
-Los lenguajes utilizados para el procesamiento y el análisis de los espectros fueron pyhton y R. Los archivos están enumerados por orden de procesamiento. A excepción del primero
+Los lenguajes utilizados para el procesamiento y el análisis de los espectros fueron pyhton y R. Los archivos están enumerados por orden de procesamiento. A excepción del primer archivo de pre-procesamiento, los archivos están nomenclados de la siguiente manera:
+
+x_alg_muestras_dias
+
+Donde
+
+x: numeración
+alg: algoritmos utilizados, supervisados (s) o no supervisados (ns)
+muestras: cantidad de muestras, indicando si se usan las réplicas biológicas (m122) o las muestras ya promediadas (m51)
+dias: días utilizados para el análisis, todos (d1247) o solo días 2 y 4 (d24)
 
 ## Pre-procesamiento
 
-
 <img src='Imagenes/1_pre_crudo.jpeg' width='500'>
+
+<img src='Imagenes/1_pre_espectro_filtrado.jpeg' width='500'>
+
+<img src='Imagenes/1_pre_espectro_filtrado.jpeg' width='500'>
+
+<img src='Imagenes/1_pre_baseline.jpeg' width='500'>
+
+<img src='Imagenes/1_pre_baseline_removed.jpeg' width='500'>
 
 ## Algoritmos No Supervisados
 
