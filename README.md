@@ -107,7 +107,7 @@ El pre-procesamiento está compuesto por las siguientes etapas:
 * <p align="justify">A partir de la detección de los picos en cada espectro, se crea la matriz de intensidad, las cual contiene en sus filas las muestras y en las columnas los picos detectados. Esta matriz también es sujeta a transformaciones para preservar los picos con mayor frecuencia de aparición en los espectros y eliminar los picos "extraños", ya que lo que buscamos en esta instancia es que las variables (en este caso los picos) aporten información al sistema para su posterior análisis. Se crea también la matriz dicotómica, la cual se origina a partir de la definición de un umbral en la matriz de intensidades que transforma los valores de los picos en 1 y 0 segun la presencia o ausencia de cada pico en cada muestra.</p>
 
    <p align="center">
-   <img src='Imagenes/1_pre_picos.jpeg' width='400'>
+   <img src='Imagenes/1_pre_matriz_grafica.jpeg' width='400'>
    </p>
    <p align="center">
      <em>Figura 6: Representación gráfica de la matriz de intensidades dicotómica. Las filas corresponden a las muestras y las columnas a los picos. El color celeste indica presencia del pico en esa muestra</em>
@@ -147,24 +147,29 @@ Resultados:
      <em>Figura 8: Clustering - CLP vs SHAM - Días 1, 2, 4 y 7 - Algoritmo: kmeans</em>
    </p>
 
-    <p align="center">
-   <img src='Imagenes/2_tasa_acierto_total' width='400'>
+   <p align="center">
+   <img src='Imagenes/2_tasa_acierto_total.jpg' width='400'>
    </p>
    <p align="center">
      <em>Figura 9: Tasa de acierto total</em>
    </p>
 
    <p align="center">
-   <img src='Imagenes/2_tasa_acierto_por_dia' width='400'>
+   <img src='Imagenes/2_tasa_acierto_por_dia.jpg' width='400'>
    </p>
    <p align="center">
      <em>Figura 10: Tasa de acierto por día</em>
    </p>
    
+   ### Archivo: 4_ns_m122_d24
 
 
+   ### Archivo: 5_ns_m51_d24
 
+   
+   ### Archivo: 6_ns_m51_vs_varios
 
+   
 ## Algoritmos Supervisados
 
 ## Conclusión
