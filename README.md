@@ -1,5 +1,6 @@
 <h1 align="center"> Análisis de muestras de MALDI-TOF de ratones.  </h1>
-<h1 align="center"> Para: Lautaro Maceira, Bárbara Rearte  </h1>
+<h3 align="center"> Origen de las muestras: Instituto Malbrán </h3>
+<h3 align="center"> Responsables: Lautaro Maceira, Bárbara Rearte  </h3>
 
 <p align="left">
    <img src="https://img.shields.io/badge/ESTADO-EN%20DESAROLLO-green">
@@ -163,6 +164,19 @@ Resultados:
    
    ### Archivo: 4_ns_m122_d24
 
+   <p align="center">
+   <img src='Imagenes/4_picos_4clusters.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 11: Picos mas preponderantes seleccionados por el algoritmo bindaranking a partir del factor CLP_D2 vs CLP_D4 vs SHAM_D4 vs SHAM_D2</em>
+   </p>
+
+   <p align="center">
+   <img src='Imagenes/4_hkmeans_4_grupos.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 12: Clustering - CLP vs SHAM - Días 2 y 4 - Algoritmo: Hkmeans</em>
+   </p>
 
    ### Archivo: 5_ns_m51_d24
 
