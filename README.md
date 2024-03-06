@@ -165,7 +165,7 @@ Resultados:
    ### Archivo: 4_ns_m122_d24
 
    <p align="center">
-   <img src='Imagenes/4_picos_4clusters.jpg' width='400'>
+   <img src='Imagenes/4_picos_4clusters.jpeg' width='400'>
    </p>
    <p align="center">
      <em>Figura 11: Picos mas preponderantes seleccionados por el algoritmo bindaranking a partir del factor CLP_D2 vs CLP_D4 vs SHAM_D4 vs SHAM_D2</em>
@@ -179,11 +179,47 @@ Resultados:
    </p>
 
    <p align="center">
-   <img src='Imagenes/4_hkmeans_4_grupos.jpg' width='400'>
+   <img src='Imagenes/4_kmeans_2_clusters_4_grupos.jpg' width='400'>
    </p>
    <p align="center">
-     <em>Figura 12: Clustering - CLP vs SHAM - Días 2 y 4 - TOP 30 picos - Algoritmo: Hkmeans</em>
+     <em>Figura 12: Clustering - CLP vs SHAM - Días 2 y 4 - TOP 15 picos - Algoritmo: kmeans</em>
    </p>
+
+   <p align="center">
+   <img src='Imagenes/4_kmeans_top10.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 13: Clustering - CLP vs SHAM - Días 2 y 4 - TOP 10 picos - Algoritmo: kmeans</em>
+   </p>
+
+   <p align="center">
+   <img src='Imagenes/4_pam_2_clusters_4_grupos.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 14: Clustering - CLP vs SHAM - Días 2 y 4 - TOP 20 picos - Algoritmo: PAM</em>
+   </p>
+
+   <p align="center">
+   <img src='Imagenes/4_pam_3_clusters_4_grupos.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 15: Clustering - CLP vs SHAM - Días 2 y 4 - 3 clusters - TOP 20 picos - Algoritmo: PAM</em>
+   </p>
+
+   <p align="center">
+   <img src='Imagenes/4_pam_3_grupos_3_clusters.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 16: Clustering - CLP vs SHAM - Días 2 y 4 - 3 clusters - TOP 30 picos - Algoritmo: PAM</em>
+   </p>
+
+   <p align="center">
+   <img src='Imagenes/4_pam_top10.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 17: Clustering - CLP vs SHAM - Días 2 y 4 - TOP 10 picos - Algoritmo: PAM</em>
+   </p>
+   
 
    ### Archivo: 5_ns_m51_d24
 
