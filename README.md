@@ -12,7 +12,7 @@
 
 *[Características de las muestras](#características-de-las-muestras)
 
-*[Características y nomenclatura de  los archivos](#características-y-nomenclatura-de-los-archivos)
+*[Características y nomenclatura de los archivos](#características-y-nomenclatura-de-los-archivos)
 
 *[Pre-procesamiento](#pre-procesamiento)
 
@@ -39,7 +39,7 @@ El proyecto consiste en el procesamiento y análisis de espectros MALDI-TOF obte
 * Metodología de adquisición: Cada muestra es sub-dividida en "réplicas biológicas" que son depositadas cada una en un pozo o "well" del equipo. Cada una de estas wells puede ser adquirida o leída mas de una vez, obteniéndose así "réplicas técnicas". La cantidad de réplicas biológicas y técnicas por muestra es variable, llegando a un máximo de 3 de cada una. Es decir, en el caso mas extremo, una muestra podría ser replicada tres veces biológicamente, y cada una adquirida otras tres veces, llegando así a un número de nueve adquisiciones correspondientes a una misma muestra.
 </p>
 
-## Características y nomenclatura de  los archivos
+## Características y nomenclatura de los archivos
 
 </p>
 Los lenguajes utilizados para el procesamiento y el análisis de los espectros fueron pyhton y R. Los archivos están enumerados por orden de procesamiento. A excepción del primer archivo de pre-procesamiento, los archivos están nomenclados de la siguiente manera:
@@ -223,9 +223,64 @@ Resultados:
 
    ### Archivo: 5_ns_m51_d24
 
+   <p align="center">
+   <img src='Imagenes/5_picos.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 18:  Picos mas preponderantes seleccionados por el algoritmo bindaranking a partir del factor CLP_D2 vs CLP_D4 vs SHAM</em>
+   </p>
+
+   <p align="center">
+   <img src='Imagenes/5_pam_3clusters.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 19: Clustering - CLP_D2 vs CLP_D4 vs SHAM - TOP 15 picos - 3 CLUSTERS - Algoritmo: PAM</em>
+   </p>
+   
    
    ### Archivo: 6_ns_m51_vs_varios
 
+   <p align="center">
+   <img src='Imagenes/6_picos_clpd2d4.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 20: Picos mas preponderantes seleccionados por el algoritmo bindaranking a partir del factor CLP_D2 vs CLP_D4</em>
+   </p>
+
+   <p align="center">
+   <img src='Imagenes/6_pam_clp_d2d4.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 21:  Clustering - CLP_D2 vs CLP_D4 - TOP 15 picos - 2 CLUSTERS - Algoritmo: PAM</em>
+   </p>
+
+   <p align="center">
+   <img src='Imagenes/6_picos_clp_sham_d2.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 22: Picos mas preponderantes seleccionados por el algoritmo bindaranking a partir del factor CLP_D2 vs SHAM_D2</em>
+   </p>
+
+   <p align="center">
+   <img src='Imagenes/6_pam_clp_sham_d2.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 23:  Clustering - CLP_D2 vs SHAM_D2 - TOP 20 picos - 2 CLUSTERS - Algoritmo: PAM</em>
+   </p>
+
+   <p align="center">
+   <img src='Imagenes/6_picos_clp_sham_d4.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 24: Picos mas preponderantes seleccionados por el algoritmo bindaranking a partir del factor CLP_D4 vs SHAM_D4</em>
+   </p>
+
+   <p align="center">
+   <img src='Imagenes/6_pam_clp_sham_d4.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 25:  Clustering - CLP_D4 vs SHAM_D4 - TOP 15 picos - 2 CLUSTERS - Algoritmo: PAM</em>
+   </p>
    
 ## Algoritmos Supervisados
 
