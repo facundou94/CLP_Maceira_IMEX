@@ -284,4 +284,12 @@ Resultados:
    
 ## Algoritmos Supervisados
 
+   ### Archivo: 3_s_m122_d1247.R
+
+   Se realizó
+
+
+   ### Archivo: 7_s_m43_d24_top15.ipynb
+
+
 ## Conclusión
