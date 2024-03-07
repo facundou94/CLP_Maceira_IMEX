@@ -119,7 +119,12 @@ El pre-procesamiento está compuesto por las siguientes etapas:
 
 ## Seguimiento de cantidad de muestras
 
-* Muestras iniciales: 303
+* Muestras iniciales o réplicas técnicas: 303
+* Réplicas técnicas luego de control de calidad: 297
+   * Réplicas biológicas: 122
+   * Réplicas biológicas de días 2 y 4: 107
+      * Muestras biológicas independientes: 55
+      * Muestras biológicas independientes de días 2 y 4: 43
 
 ## Algoritmos No Supervisados
 
