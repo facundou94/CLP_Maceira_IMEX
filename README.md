@@ -286,16 +286,56 @@ Resultados:
 
    ### Archivo: 3_s_m122_d1247.R
 
-   1) Se cargó la matriz dicotómica de 122 réplicas biológicas x 218 picos y se dividieron las muestras en grupo de entrenamiento y grupo de testeo bajo una relación de 60% entrenamiento y 40% testeo.
-   2) Se entrenaron los siguientes modelos:
+   Se probaron modelos de aprendizaje supervisado con las 122 réplicas biológicas correspondiente a todos los días.
+   
+   1) <p align="justify">Se cargó la matriz dicotómica de 122 réplicas biológicas x 218 picos y se dividieron las muestras en grupo de entrenamiento y grupo de testeo bajo una relación de 60% entrenamiento y 40% testeo.</p>
+   2) <p align="justify">Se seleccionan los 20 picos mas preponderantes mediante el algoritmo *bindaranking* bajo el factor CLP/SHAM con el propósito de reducir la cantidad de predictores.</p>
+   3) Se entrenaron los siguientes modelos:
          * Binda (Binary Discriminant Analysis)
          * Random Forest
          * kNN (k nearest neighbor)
          * SVM Radial (Support Vector Machine con kernel radial)
-   
+   4) Se realizan las predicciones y a partir de ellas se generan las curvas ROC para cada modelo.
 
+   <p align="center">
+   <img src='Imagenes/3_sup_curvasROC.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 26:  Curvas ROC para cada modelo de entrenamiento y valores de AUC (Área bajo la curva)</em>
+   </p>
 
    ### Archivo: 7_s_m107_d24_top15.ipynb
 
+   Se probaron modelos de aprendizaje supervisado con 107 réplicas biológicas correspondiente a los días 2 y 4.
+
+   1) <p align="justify">Se representaron los porcentajes de muestras correspondiente a cada tipo de factor (CLP_D2, CLP_D4 y SHAM)</p>
+   2) <p align="justify">Se entrenó un modelo de Regresión Logística</p>
+
+      *Regresión Logística - accuracy score: 86%*
+
+   <p align="center">
+   <img src='Imagenes/7_matriz_confusion_reglog.JPG' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 27:  Matriz de confusión de la Regresión Logística</em>
+   </p>
+   
+   3) <p align="justify">Se entrenó un modelo de Random Forest</p>
+
+      *Random Forest- accuracy score: 72% (A partir de validación cruzada con k=5)*
+
+   <p align="center">
+   <img src='Imagenes/7_picos_rf.JPG' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 28:  Preponderancia de predictores del Random Forest</em>
+   </p>
+
+   <p align="center">
+   <img src='Imagenes/7_arbol_decision.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 29:  Arbol de decisión del Random Forest</em>
+   </p>
 
 ## Conclusión
