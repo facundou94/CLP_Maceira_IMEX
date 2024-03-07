@@ -286,10 +286,16 @@ Resultados:
 
    ### Archivo: 3_s_m122_d1247.R
 
-   Se realizó
+   1) Se cargó la matriz dicotómica de 122 réplicas biológicas x 218 picos y se dividieron las muestras en grupo de entrenamiento y grupo de testeo bajo una relación de 60% entrenamiento y 40% testeo.
+   2) Se entrenaron los siguientes modelos:
+         * Binda (Binary Discriminant Analysis)
+         * Random Forest
+         * kNN (k nearest neighbor)
+         * SVM Radial (Support Vector Machine con kernel radial)
+   
 
 
-   ### Archivo: 7_s_m43_d24_top15.ipynb
+   ### Archivo: 7_s_m107_d24_top15.ipynb
 
 
 ## Conclusión
