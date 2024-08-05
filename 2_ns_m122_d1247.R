@@ -117,7 +117,7 @@ cluster_kmean20 <- cluster_kmean20 +
   geom_point(data = cluster_kmean20$data, 
              aes(x = x, y = y, color = factor_tipo,
                  size = df_metadata_prom_rep$dia)) +
-  scale_color_manual(values = c("maroon","steelblue4", "maroon", "steelblue4")) +
+  scale_color_manual(values = c("maroon","steelblue4","steelblue4", "maroon" )) +
   scale_size_continuous(range = c(2, 4)) + 
   labs(color = "Cluster", size = "Día") +
   theme(legend.position = "right")
@@ -248,9 +248,6 @@ cat("Recall:", recall, "\n")
 cat("F1-Score:", f1_score, "\n")
 cat("Accuracy:", accuracy, "\n")
 
-# Ver parte de MATRIZ CONFUSION
-# Prueba de distintas métricas
-
 # 2. Silhouette Score
 silhouette_score <- silhouette(km.res20$cluster, dist(matint_122_dico[, top_actual]))
 fviz_silhouette(silhouette_score)
@@ -262,6 +259,7 @@ print(wcss)
 # 4. Between-cluster Sum of Squares (BCSS)
 bcss <- km.res20$betweenss
 print(bcss)
+
 #
 #
 #
