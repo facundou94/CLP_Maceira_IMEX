@@ -141,28 +141,28 @@ Resultados:
    ### Archivo: 2_ns_m122_d1247
 
    <p align="center">
-   <img src='Imagenes/2_ranking_picos.JPEG' width='400'>
+   <img src='Imagenes/2_ranking_picos.jpeg' width='400'>
    </p>
    <p align="center">
      <em>Figura 7: Picos mas preponderantes seleccionados por el algoritmo bindaranking a partir del factor CLP vs SHAM</em>
    </p>
 
    <p align="center">
-   <img src='Imagenes/2_CLP_vs_SHAM_kmeans.JPEG' width='400'>
+   <img src='Imagenes/2_CLP_vs_SHAM_kmeans.jpeg' width='400'>
    </p>
    <p align="center">
      <em>Figura 8: Clustering - CLP vs SHAM - Días 1, 2, 4 y 7 - TOP 20 picos - Algoritmo: kmeans</em>
    </p>
 
    <p align="center">
-   <img src='Imagenes/2_tasa_acierto_total.JPEG' width='400'>
+   <img src='Imagenes/2_tasa_acierto_total.jpeg' width='400'>
    </p>
    <p align="center">
      <em>Figura 9: Tasa de acierto total</em>
    </p>
 
    <p align="center">
-   <img src='Imagenes/2_tasa_acierto_por_dia.JPEG' width='400'>
+   <img src='Imagenes/2_tasa_acierto_por_dia.jpeg' width='400'>
    </p>
    <p align="center">
      <em>Figura 10: Tasa de acierto por día</em>
