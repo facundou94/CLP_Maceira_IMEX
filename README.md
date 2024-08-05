@@ -134,38 +134,75 @@ El procedimiento para la realización de los algoritmos No Supervisados fue el s
    3) Por medio de la matriz dicotómica, se aplica la función *bindaranking* con la cual se obtienen los picos que mejor variabilidad aportan a partir de un factor que se ingresa como variable de entrada. Este factor puede ser CLP vs SHAM, o días por ejemplo.
    4) Se realizan simulaciones de los modelos variando la cantidad de X primeros picos del análisis realizado en (3) y los algoritmos de clustering. Se realizaron pruebas con kmeans, HKmeans y PAM.
    5) Una vez realizada la clasificación No Supervisada, se comparan los puntos clasificados con su etiqueta de interés real (CLP, SHAM).
+   6) Se calculan métricas de interés para evaluar el desempeño de los análisis
 
 Resultados:
 
    ### Archivo: 2_ns_m122_d1247
 
    <p align="center">
-   <img src='Imagenes/2_ranking_picos.jpg' width='400'>
+   <img src='Imagenes/2_ranking_picos.JPEG' width='400'>
    </p>
    <p align="center">
      <em>Figura 7: Picos mas preponderantes seleccionados por el algoritmo bindaranking a partir del factor CLP vs SHAM</em>
    </p>
 
    <p align="center">
-   <img src='Imagenes/2_CLP_vs_SHAM_kmeans.jpg' width='400'>
+   <img src='Imagenes/2_CLP_vs_SHAM_kmeans.JPEG' width='400'>
    </p>
    <p align="center">
      <em>Figura 8: Clustering - CLP vs SHAM - Días 1, 2, 4 y 7 - TOP 20 picos - Algoritmo: kmeans</em>
    </p>
 
    <p align="center">
-   <img src='Imagenes/2_tasa_acierto_total.jpg' width='400'>
+   <img src='Imagenes/2_tasa_acierto_total.JPEG' width='400'>
    </p>
    <p align="center">
      <em>Figura 9: Tasa de acierto total</em>
    </p>
 
    <p align="center">
-   <img src='Imagenes/2_tasa_acierto_por_dia.jpg' width='400'>
+   <img src='Imagenes/2_tasa_acierto_por_dia.JPEG' width='400'>
    </p>
    <p align="center">
      <em>Figura 10: Tasa de acierto por día</em>
    </p>
+
+   Métricas:
+
+   | Cluster | Tamaño | Ancho promedio silueta  |
+   |---------|--------|-------------------------|
+   | 1       | 56     | 0.38                    |
+   | 2       | 66     | 0.30                    |
+
+   | Métrica | Valor |
+   |---------|-------|
+   | VSP     | 0.34  |
+   | WCSS    | 343   |
+   | BCSS    | 216   |
+   
+   <p align="center">
+   <img src='Imagenes/2_silueta.JPEG' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 10: Gráfica de valores silhouette para cada punto y el promedio general</em>
+   </p>
+
+   Matriz de confusión y métricas:
+   
+   |------------|        Valor        |
+   |------------| cluster1 | cluster2 |
+   |Referencia  |---------------------|
+   | SHAM       | 48       | 1        |
+   | CLP        | 8        | 65       |
+
+   | Métrica    | Valor |
+   |------------|-------|
+   | Precision: | 0.98  |
+   | Recall:    | 0.89  |
+   | F1-Score:  | 0.93  |
+   | Accuracy:  | 0.93  |
+
    
    ### Archivo: 4_ns_m122_d24
 
