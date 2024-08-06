@@ -1042,6 +1042,7 @@ for (i in 1:K.num) {
 
 cat("Between-cluster Sum of Squares (BCSS):", bcss, "\n")
 
+#DALELOCO
 # ### EXPORTAR MATRICES CON 30 PICOS DE INTERÉS ##################################
 # ################################################################################
 # 
