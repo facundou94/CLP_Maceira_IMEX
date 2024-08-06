@@ -182,7 +182,7 @@ Resultados:
    | BCSS    | 216   |
    
    <p align="center">
-   <img src='Imagenes/2_silueta.JPEG' width='400'>
+   <img src='Imagenes/2_silueta.jpeg' width='400'>
    </p>
    <p align="center">
      <em>Figura 10: Gráfica de valores silhouette para cada punto y el promedio general</em>
@@ -190,9 +190,9 @@ Resultados:
 
    Matriz de confusión y métricas:
    
-   |------------|        Valor        |
-   |------------| cluster1 | cluster2 |
-   |Referencia  |---------------------|
+                
+   | Referencia | cluster1 | cluster2 |
+   |------------|----------|----------|
    | SHAM       | 48       | 1        |
    | CLP        | 8        | 65       |
 
