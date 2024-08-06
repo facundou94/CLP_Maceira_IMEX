@@ -25,9 +25,11 @@ library(klaR)
 ################################################################################
 
 
-#setwd(script_path) o session -> set working directory -> carpeta data
-load("matint_122.Rdata")
-load("matint_122_dico.Rdata")
+data_path <- file.path("Data")
+
+# Load the Rdata files using the relative path
+load(file.path(data_path, "matint_122_dico.Rdata"))
+load(file.path(data_path,"matint_122.Rdata"))
 
 ### ANÁLISIS DE MACHINE LEARNING ###############################################
 ################################################################################
