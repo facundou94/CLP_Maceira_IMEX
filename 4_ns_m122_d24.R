@@ -155,8 +155,8 @@ total_cluster2 <- sum(hkmeans.top30.k2$cluster == 2)
 total_cluster1 <- sum(hkmeans.top30.k2$cluster == 1)
 
 # Cálculo tasa de acierto por cluster
-tasa_acierto_CLP <- acierto_CLP / total_cluster2
-tasa_acierto_SHAM <- acierto_SHAM / total_cluster1
+tasa_acierto_CLP <- acierto_CLP / total_CLP
+tasa_acierto_SHAM <- acierto_SHAM / total_SHAM
 
 # Crear un dataframe con los resultados para el gráfico general
 datos_grafico_general <- data.frame(Categoria = c("CLP", "SH"),
@@ -172,7 +172,7 @@ grafico_general <- ggplot(datos_grafico_general,
                               fill = Categoria)) +
   geom_bar(stat = "identity") +
   geom_text(aes(label = sprintf("%.2f", Tasa_Acierto)), vjust = -0.5) +
-  labs(title = "Tasa de Acierto Total",
+  labs(title = "Tasa de Acierto top30 HKMEANS 2 clusters",
        x = "Categoría",
        y = "Tasa de Acierto") +
   scale_fill_manual(values = c("CLP" = "red4", "SH" = "blue4")) +
@@ -253,9 +253,60 @@ print(cluster.pam.top20.k3)
 
 ### OBTENCIÓN DE MÉTRICAS  #####################################################
 
-# Solo se calcula el parámetro silhouette en este análisis en particular
+### TASA DE ACIERTO POR CLUSTER #################################################
 
-print("Resultados de pam.top20.k3: ")
+print("Resultados de cluster.pam.top20.k3: ")
+
+# Obtener los nombres de las muestras
+sample_names <- names(pam.top20.k3$clustering)
+
+# Calcular la tasa de acierto para las muestras que contienen "CLP_D2"
+total_D2 <- sum(grepl("D2", sample_names))
+
+# Calcular la tasa de acierto para las muestras que contienen "CLP_D4"
+total_CLP_D4 <- sum(grepl("CLP_D4", sample_names))
+
+# Calcular la tasa de acierto para las muestras que contienen "SH"
+total_SHAM_D4 <- sum(grepl("SH_D4", sample_names))
+
+# Muestras CLP_D2, CLP_D4 y SHAM clasificadas correctamente
+acierto_D2 <- sum(grepl("D2", sample_names) & pam.top20.k3$clustering == 1)
+acierto_CLP_D4 <- sum(grepl("CLP_D4", sample_names) & pam.top20.k3$clustering == 2)
+acierto_SHAM_D4 <- sum(grepl("SH_D4", sample_names) & pam.top20.k3$clustering == 3)
+
+# Totales por cluster
+total_cluster1 <- sum(pam.top20.k3$clustering == 1)
+total_cluster2 <- sum(pam.top20.k3$clustering == 2)
+total_cluster3 <- sum(pam.top20.k3$clustering == 3)
+
+# Cálculo tasa de acierto por cluster
+tasa_acierto_D2 <- acierto_D2 / total_D2
+tasa_acierto_CLP_D4 <- acierto_CLP_D4 / total_CLP_D4
+tasa_acierto_SHAM_D4 <- acierto_SHAM_D4 / total_SHAM_D4
+
+# Crear un dataframe con los resultados para el gráfico general
+datos_grafico_general <- data.frame(
+  Categoria = c("D2", "CLP_D4", "SH_D4"),
+  Aciertos = c(acierto_D2, acierto_CLP_D4, acierto_SHAM_D4),
+  Total = c(total_cluster1, total_cluster2, total_cluster3),
+  Tasa_Acierto = c(tasa_acierto_D2, tasa_acierto_CLP_D4, tasa_acierto_SHAM_D4),
+  Dia = "Total"
+)
+
+# Gráfico general
+grafico_general <- ggplot(datos_grafico_general, 
+                          aes(x = Categoria, y = Tasa_Acierto, 
+                              fill = Categoria)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = sprintf("%.2f", Tasa_Acierto)), vjust = -0.5) +
+  labs(title = "Tasa de Acierto top20 PAM 3 clusters",
+       x = "Categoría",
+       y = "Tasa de Acierto") +
+  scale_fill_manual(values = c("D2" = "red4", "CLP_D4" = "orange4", "SH_D4" = "blue4")) +
+  theme_minimal()
+
+plot(grafico_general)
+
 
 # 1. Silhouette Score
 silhouette_score <- silhouette(pam.top20.k3$cluster, dist(matint_122_dico_d2d4[, top_actual]))
@@ -312,8 +363,8 @@ total_cluster1 <- sum(pam.top20.k2$clustering == 1)
 total_cluster2 <- sum(pam.top20.k2$clustering == 2)
 
 # Cálculo tasa de acierto por cluster
-tasa_acierto_CLP <- acierto_CLP / total_cluster1
-tasa_acierto_SHAM <- acierto_SHAM / total_cluster2
+tasa_acierto_CLP <- acierto_CLP / total_CLP
+tasa_acierto_SHAM <- acierto_SHAM / total_SHAM
 
 # Crear un dataframe con los resultados para el gráfico general
 datos_grafico_general <- data.frame(
@@ -330,7 +381,7 @@ grafico_general <- ggplot(datos_grafico_general,
                               fill = Categoria)) +
   geom_bar(stat = "identity") +
   geom_text(aes(label = sprintf("%.2f", Tasa_Acierto)), vjust = -0.5) +
-  labs(title = "Tasa de Acierto Total",
+  labs(title = "Tasa de Acierto top20 PAM 2 clusters",
        x = "Categoría",
        y = "Tasa de Acierto") +
   scale_fill_manual(values = c("CLP" = "red4", "SH" = "blue4")) +
@@ -455,8 +506,8 @@ total_cluster2 <- sum(kmeans.top15.k2$cluster == 2)
 total_cluster1 <- sum(kmeans.top15.k2$cluster == 1)
 
 # Cálculo tasa de acierto por cluster
-tasa_acierto_CLP <- acierto_CLP / total_cluster2
-tasa_acierto_SHAM <- acierto_SHAM / total_cluster1
+tasa_acierto_CLP <- acierto_CLP / total_CLP
+tasa_acierto_SHAM <- acierto_SHAM / total_SHAM
 
 # Crear un dataframe con los resultados para el gráfico general
 datos_grafico_general <- data.frame(Categoria = c("CLP", "SH"),
@@ -472,7 +523,7 @@ grafico_general <- ggplot(datos_grafico_general,
                               fill = Categoria)) +
   geom_bar(stat = "identity") +
   geom_text(aes(label = sprintf("%.2f", Tasa_Acierto)), vjust = -0.5) +
-  labs(title = "Tasa de Acierto Total",
+  labs(title = "Tasa de Acierto top15 KMEAN 2 clusters",
        x = "Categoría",
        y = "Tasa de Acierto") +
   scale_fill_manual(values = c("CLP" = "red4", "SH" = "blue4")) +
@@ -574,8 +625,8 @@ total_cluster2 <- sum(kmeans.top10.k2$cluster == 2)
 total_cluster1 <- sum(kmeans.top10.k2$cluster == 1)
 
 # Cálculo tasa de acierto por cluster
-tasa_acierto_CLP <- acierto_CLP / total_cluster2
-tasa_acierto_SHAM <- acierto_SHAM / total_cluster1
+tasa_acierto_CLP <- acierto_CLP / total_CLP
+tasa_acierto_SHAM <- acierto_SHAM / total_SHAM
 
 # Crear un dataframe con los resultados para el gráfico general
 datos_grafico_general <- data.frame(Categoria = c("CLP", "SH"),
@@ -591,7 +642,7 @@ grafico_general <- ggplot(datos_grafico_general,
                               fill = Categoria)) +
   geom_bar(stat = "identity") +
   geom_text(aes(label = sprintf("%.2f", Tasa_Acierto)), vjust = -0.5) +
-  labs(title = "Tasa de Acierto Total",
+  labs(title = "Tasa de Acierto top10 KMEAN 2 clusters",
        x = "Categoría",
        y = "Tasa de Acierto") +
   scale_fill_manual(values = c("CLP" = "red4", "SH" = "blue4")) +
@@ -674,33 +725,35 @@ print(cluster.pam.top10.k2)
 
 print("Resultados de pam.top10.k2: ")
 
-for(i in 1:length(pam.top10.k2[[1]])) {
-  pam.top10.k2$names[i] = sub("_.*", "", attr(pam.top10.k2[[1]][i],"names"))
-  pam.top10.k2$dia[i] = df_metadata_prom_rep$dia[i]
-}
+# Obtener los nombres de las muestras
+sample_names <- names(pam.top10.k2$clustering)
 
-# Calcular la tasa de acierto para todo el conjunto de datos
-total_CLP <- sum(pam.top10.k2$names == "CLP")  # Total de muestras CLP
-total_SHAM <- sum(pam.top10.k2$names == "SH")  # Total de muestras SHAM
+# Calcular la tasa de acierto para las muestras que contienen "CLP"
+total_CLP <- sum(grepl("CLP", sample_names))
 
-# Muestras CLP Y SHAM clasificadas correctamente
-acierto_CLP <- sum(pam.top10.k2$names == "CLP" & pam.top10.k2$cluster == 1)
-acierto_SHAM <- sum(pam.top10.k2$names == "SH" & pam.top10.k2$cluster == 2)
+# Calcular la tasa de acierto para las muestras que contienen "SH"
+total_SHAM <- sum(grepl("SH", sample_names))
 
-total_cluster2 <- sum(pam.top10.k2$cluster == 2)
-total_cluster1 <- sum(pam.top10.k2$cluster == 1)
+# Muestras CLP_D2, CLP_D4 y SHAM clasificadas correctamente
+acierto_CLP <- sum(grepl("CLP", sample_names) & pam.top10.k2$clustering == 1)
+acierto_SHAM <- sum(grepl("SH", sample_names) & pam.top10.k2$clustering == 2)
+
+# Totales por cluster
+total_cluster1 <- sum(pam.top10.k2$clustering == 1)
+total_cluster2 <- sum(pam.top10.k2$clustering == 2)
 
 # Cálculo tasa de acierto por cluster
-tasa_acierto_CLP <- acierto_CLP / total_cluster2
-tasa_acierto_SHAM <- acierto_SHAM / total_cluster1
+tasa_acierto_CLP <- acierto_CLP / total_CLP
+tasa_acierto_SHAM <- acierto_SHAM / total_SHAM
 
 # Crear un dataframe con los resultados para el gráfico general
-datos_grafico_general <- data.frame(Categoria = c("CLP", "SH"),
-                                    Aciertos = c(acierto_CLP, acierto_SHAM),
-                                    Total = c(total_cluster2, total_cluster1),
-                                    Tasa_Acierto = c(tasa_acierto_CLP, 
-                                                     tasa_acierto_SHAM),
-                                    Dia = "Total")
+datos_grafico_general <- data.frame(
+  Categoria = c("CLP", "SH"),
+  Aciertos = c(acierto_CLP, acierto_SHAM),
+  Total = c(total_cluster1, total_cluster2),
+  Tasa_Acierto = c(tasa_acierto_CLP, tasa_acierto_SHAM),
+  Dia = "Total"
+)
 
 # Gráfico general
 grafico_general <- ggplot(datos_grafico_general, 
@@ -708,13 +761,14 @@ grafico_general <- ggplot(datos_grafico_general,
                               fill = Categoria)) +
   geom_bar(stat = "identity") +
   geom_text(aes(label = sprintf("%.2f", Tasa_Acierto)), vjust = -0.5) +
-  labs(title = "Tasa de Acierto Total",
+  labs(title = "Tasa de Acierto top10 PAM 2 clusters",
        x = "Categoría",
        y = "Tasa de Acierto") +
   scale_fill_manual(values = c("CLP" = "red4", "SH" = "blue4")) +
   theme_minimal()
 
 plot(grafico_general)
+
 
 ### OBTENCIÓN DE MÉTRICAS #####################################################
 
@@ -904,9 +958,9 @@ total_cluster2 <- sum(pam.top30.k4.g3$clustering == 2)
 total_cluster3 <- sum(pam.top30.k4.g3$clustering == 3)
 
 # Cálculo tasa de acierto por cluster
-tasa_acierto_CLP_D2 <- acierto_CLP_D2 / total_cluster1
-tasa_acierto_CLP_D4 <- acierto_CLP_D4 / total_cluster2
-tasa_acierto_SHAM <- acierto_SHAM / total_cluster3
+tasa_acierto_CLP_D2 <- acierto_CLP_D2 / total_CLP_D2
+tasa_acierto_CLP_D4 <- acierto_CLP_D4 / total_CLP_D4
+tasa_acierto_SHAM <- acierto_SHAM / total_SHAM
 
 # Crear un dataframe con los resultados para el gráfico general
 datos_grafico_general <- data.frame(
@@ -923,13 +977,17 @@ grafico_general <- ggplot(datos_grafico_general,
                               fill = Categoria)) +
   geom_bar(stat = "identity") +
   geom_text(aes(label = sprintf("%.2f", Tasa_Acierto)), vjust = -0.5) +
-  labs(title = "Tasa de Acierto Total",
+  labs(title = "Tasa de Acierto SH(D2 y D4) vs CLP_D4 vs CLP_D2",
        x = "Categoría",
        y = "Tasa de Acierto") +
   scale_fill_manual(values = c("CLP_D2" = "red4", "CLP_D4" = "orange4", "SH" = "blue4")) +
   theme_minimal()
 
 plot(grafico_general)
+
+# 2. Silhouette Score
+silhouette_score <- silhouette(pam.top30.k4.g3$cluster, dist(matint_122_dico_d2d4[, top_actual]))
+fviz_silhouette(silhouette_score)
 
 ### OBTENCIÓN DE MÉTRICAS  #####################################################
 
