@@ -1,41 +1,3 @@
-# Título del Proyecto
-
-## Tabla de Contenidos
-- [Introducción](#introducción)
-- [Características](#características)
-- [Instalación](#instalación)
-- [Uso](#uso)
-- [Sección Colapsable](#sección-colapsable)
-
-## Introducción
-El contenido de la introducción va aquí.
-
-## Características
-El contenido de las características va aquí.
-
-## Instalación
-Las instrucciones de instalación van aquí.
-
-## Uso
-Las instrucciones de uso van aquí.
-
-## Sección Colapsable
-
-<details>
-  <summary>Haz clic para expandir</summary>
-  
-  ## Contenido Oculto
-  
-  Este contenido estará oculto hasta que hagas clic para expandir.
-  
-  - Elemento 1
-  - Elemento 2
-  - Elemento 3
-  
-</details>
-
-
-
 <h1 align="center"> Análisis de muestras de MALDI-TOF de ratones.  </h1>
 <h3 align="center"> Origen de las muestras: Instituto Malbrán </h3>
 <h3 align="center"> Responsables: Lautaro Maceira, Bárbara Rearte  </h3>
@@ -256,6 +218,45 @@ Resultados:
    </p>
    <p align="center">
      <em>Figura 12: Clustering - CLP vs SHAM - Días 2 y 4 - TOP 30 picos - Algoritmo: Hkmeans</em>
+   </p>
+
+   <p align="center">
+   <img src='Imagenes/4_acierto_1.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 12: Tasa de acierto por día</em>
+   </p>
+
+   Matriz de confusión y métricas:
+   
+   | Referencia | cluster1 | cluster2 |
+   |------------|----------|----------|
+   | SHAM       | 46       | 0        |
+   | CLP        | 8        | 53       |
+
+   | Métrica    | Valor |
+   |------------|-------|
+   | Precision: | 1.00  |
+   | Recall:    | 0.87  |
+   | F1-Score:  | 0.93  |
+   | Accuracy:  | 0.92  |
+
+   | Cluster | Tamaño | Ancho promedio silueta  |
+   |---------|--------|-------------------------|
+   | 1       | 53     | 0.26                    |
+   | 2       | 54     | 0.31                    |
+
+   | Métrica | Valor |
+   |---------|-------|
+   | VSP     | 0.29  |
+   | WCSS    | 450   |
+   | BCSS    | 221   |
+
+   <p align="center">
+   <img src='Imagenes/4_silueta_1.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 12: Gráfica de valores silhouette para cada punto y el promedio general</em>
    </p>
 
    <p align="center">
