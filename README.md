@@ -213,6 +213,8 @@ Resultados:
      <em>Figura 11: Picos mas preponderantes seleccionados por el algoritmo bindaranking a partir del factor CLP_D2 vs CLP_D4 vs SHAM_D4 vs SHAM_D2</em>
    </p>
 
+   *Clustering - CLP vs SHAM - Días 2 y 4 - TOP 30 picos - Algoritmo: Hkmeans*
+   
    <p align="center">
    <img src='Imagenes/4_hkmeans_4_grupos.jpg' width='400'>
    </p>
@@ -221,7 +223,7 @@ Resultados:
    </p>
 
    <p align="center">
-   <img src='Imagenes/4_acierto_1.jpg' width='400'>
+   <img src='Imagenes/4_acierto_1.jpeg' width='400'>
    </p>
    <p align="center">
      <em>Figura 12: Tasa de acierto por día</em>
@@ -253,12 +255,14 @@ Resultados:
    | BCSS    | 221   |
 
    <p align="center">
-   <img src='Imagenes/4_silueta_1.jpg' width='400'>
+   <img src='Imagenes/4_silueta_1.jpeg' width='400'>
    </p>
    <p align="center">
      <em>Figura 12: Gráfica de valores silhouette para cada punto y el promedio general</em>
    </p>
 
+   *Clustering - CLP vs SHAM - Días 2 y 4 - TOP 15 picos - Algoritmo: kmeans*
+   
    <p align="center">
    <img src='Imagenes/4_kmeans_2_clusters_4_grupos.jpg' width='400'>
    </p>
@@ -266,6 +270,45 @@ Resultados:
      <em>Figura 12: Clustering - CLP vs SHAM - Días 2 y 4 - TOP 15 picos - Algoritmo: kmeans</em>
    </p>
 
+   <p align="center">
+   <img src='Imagenes/4_acierto_4.jpeg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 12: Tasa de acierto por día</em>
+   </p>
+   
+   Matriz de confusión y métricas:
+   
+   | Referencia | cluster1 | cluster2 |
+   |------------|----------|----------|
+   | SHAM       | 45       | 1        |
+   | CLP        | 8        | 53       |
+
+   | Métrica    | Valor |
+   |------------|-------|
+   | Precision: | 0.98  |
+   | Recall:    | 0.87  |
+   | F1-Score:  | 0.92  |
+   | Accuracy:  | 0.91  |
+
+   | Cluster | Tamaño | Ancho promedio silueta  |
+   |---------|--------|-------------------------|
+   | 1       | 54     | 0.31                    |
+   | 2       | 53     | 0.41                    |
+
+   | Métrica | Valor |
+   |---------|-------|
+   | VSP     | 0.36  |
+   | WCSS    | 210   |
+   | BCSS    | 141   |
+
+   <p align="center">
+   <img src='Imagenes/4_silueta_4.jpeg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 12: Gráfica de valores silhouette para cada punto y el promedio general</em>
+   </p>
+   
    <p align="center">
    <img src='Imagenes/4_kmeans_top10.jpg' width='400'>
    </p>
