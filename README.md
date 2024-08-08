@@ -1,3 +1,41 @@
+# Título del Proyecto
+
+## Tabla de Contenidos
+- [Introducción](#introducción)
+- [Características](#características)
+- [Instalación](#instalación)
+- [Uso](#uso)
+- [Sección Colapsable](#sección-colapsable)
+
+## Introducción
+El contenido de la introducción va aquí.
+
+## Características
+El contenido de las características va aquí.
+
+## Instalación
+Las instrucciones de instalación van aquí.
+
+## Uso
+Las instrucciones de uso van aquí.
+
+## Sección Colapsable
+
+<details>
+  <summary>Haz clic para expandir</summary>
+  
+  ## Contenido Oculto
+  
+  Este contenido estará oculto hasta que hagas clic para expandir.
+  
+  - Elemento 1
+  - Elemento 2
+  - Elemento 3
+  
+</details>
+
+
+
 <h1 align="center"> Análisis de muestras de MALDI-TOF de ratones.  </h1>
 <h3 align="center"> Origen de las muestras: Instituto Malbrán </h3>
 <h3 align="center"> Responsables: Lautaro Maceira, Bárbara Rearte  </h3>
