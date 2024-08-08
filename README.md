@@ -223,7 +223,7 @@ Resultados:
    </p>
 
    <p align="center">
-   <img src='Imagenes/4_aciertos_1.jpeg' width='400'>
+   <img src='Imagenes/4_acierto_1.tiff' width='400'>
    </p>
    <p align="center">
      <em>Figura 12: Tasa de acierto por día</em>
