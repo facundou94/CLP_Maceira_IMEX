@@ -618,15 +618,11 @@ Resultados:
    | BCSS    | 95    |
 
    <p align="center">
-   <img src='Imagenes/6_silueta_1.jpg' width='400'>
+   <img src='Imagenes/6_silueta_1.jpeg' width='400'>
    </p>
    <p align="center">
      <em>Figura 31: Gráfica de valores silhouette para cada punto y el promedio general</em>
    </p>
-   </details>
-
-   <details>
-        <summary>Expandir</summary>
    
    *Clustering - CLP_D2 vs SHAM_D2 - TOP 20 picos - 2 CLUSTERS - Algoritmo: PAM*
    
@@ -643,10 +639,7 @@ Resultados:
    <p align="center">
      <em>Figura 23:  Clustering - CLP_D2 vs SHAM_D2 - TOP 20 picos - 2 CLUSTERS - Algoritmo: PAM</em>
    </p>
-   </details>
    
-   <details>
-        <summary>Expandir</summary>
    *Clustering - CLP_D4 vs SHAM_D4 - TOP 15 picos - 2 CLUSTERS - Algoritmo: PAM*
    
    <p align="center">
@@ -683,7 +676,7 @@ Resultados:
    | Accuracy:  | 0.97  |
 
    <p align="center">
-   <img src='Imagenes/6_siluetas_2.jpg' width='400'>
+   <img src='Imagenes/6_siluetas_2.jpeg' width='400'>
    </p>
    <p align="center">
      <em>Figura 31: Gráfica de valores silhouette para cada punto y el promedio general</em>
@@ -700,13 +693,6 @@ Resultados:
    | WCSS    | 71    |
    | BCSS    | 155   |
 
-   <p align="center">
-   <img src='Imagenes/6_silueta_1.jpg' width='400'>
-   </p>
-   <p align="center">
-     <em>Figura 31: Gráfica de valores silhouette para cada punto y el promedio general</em>
-   </p>
-   </details>
 </details>
 
 ## Algoritmos Supervisados
