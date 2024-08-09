@@ -530,8 +530,10 @@ Resultados:
    
    ### Archivo: 5_ns_m51_d24
 
+   *Clustering - CLP_D2 vs CLP_D4 vs SHAM - TOP 15 picos - 3 CLUSTERS - Algoritmo: HKmeans*
+   *Nota: Bajo la misma configuración, con el algortimo PAM los resultados son similares.*
    <details>
-     <summary>Haz clic para expandir</summary>
+     <summary>Expandir</summary>
    
    <p align="center">
    <img src='Imagenes/5_picos.jpg' width='400'>
@@ -547,6 +549,25 @@ Resultados:
      <em>Figura 33: Clustering - CLP_D2 vs CLP_D4 vs SHAM - TOP 15 picos - 3 CLUSTERS - Algoritmo: PAM</em>
    </p>
    </details>
+
+   <p align="center">
+   <img src='Imagenes/4_5_aciertos.jpeg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 30: Tasa de acierto por grupo</em>
+   </p>
+
+   | Cluster | Tamaño | Ancho promedio silueta  |
+   |---------|--------|-------------------------|
+   | 1       | 7      | 0.35                    |
+   | 2       | 20     | 0.56                    |
+   | 3       | 16     | 0.28                    |
+
+   | Métrica | Valor |
+   |---------|-------|
+   | VSP     | 0.42  |
+   | WCSS    | 52    |
+   | BCSS    | 92    |
    
    ### Archivo: 6_ns_m51_vs_varios
 
