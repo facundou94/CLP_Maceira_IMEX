@@ -200,6 +200,13 @@ plot(grafico_general)
 silhouette_score <- silhouette(hkmeans.top15.k3$cluster, dist(matint_51_dico_d2d4[, top_actual]))
 fviz_silhouette(silhouette_score)
 
+# 2. Within-cluster Sum of Squares (WCSS)
+wcss <- hkmeans.top15.k3$tot.withinss
+print(wcss)
+
+# 3. Between-cluster Sum of Squares (BCSS)
+bcss <- hkmeans.top15.k3$betweenss
+print(bcss)
 
 # NOTA: Este mismo esquema con algoritmo PAM da resultados similares
 
