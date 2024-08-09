@@ -1,8 +1,8 @@
 ################ MALDI-TOF ANALISIS CLP ########################################
 ################ 5) ns_m51_d24  ################################################
 #
-# ns:    No Supervisado
-# m51:  Utiliza las muestras (51)
+# ns:  No Supervisado
+# m51: Utiliza las muestras (51)
 # d24: Utiliza los días 2 y 4
 #
 # Autor: Bioing. Facundo Urteaga (IBB-CONICET)
@@ -30,10 +30,11 @@ library(factoextra)
 ################################################################################
 
 
-#script_path <- "C:/Users/Facundo/Documents/Proyectos/Data"
-#setwd(script_path) session -> set working directory
-load("matint_51_dico.Rdata")
-load("matint_51.Rdata")
+data_path <- file.path("Data")
+
+# Load the Rdata files using the relative path
+load(file.path(data_path, "matint_51_dico.Rdata"))
+load(file.path(data_path, "matint_51.Rdata"))
 
 df_metadata_unicas$dia <- as.integer(gsub("[^0-9]", "", 
                                           df_metadata_unicas$dia))
@@ -132,7 +133,7 @@ cluster.hkmeans.top15.k3 <- cluster.hkmeans.top15.k3 +
   geom_point(data = cluster.hkmeans.top15.k3$data, 
              aes(x = x, y = y, color = df_unicas_d2d4$factor1,
                  size = df_unicas_d2d4$dia)) +
-  scale_color_manual(values = c("maroon1","aquamarine3","blueviolet", "blue1",
+  scale_color_manual(values = c("maroon1","blueviolet","aquamarine3", "blue1",
                                 "blue4", "maroon4")) +
   scale_size_continuous(range = c(2, 3)) +
   labs(color = "Cluster", size = "Día") +
@@ -140,34 +141,96 @@ cluster.hkmeans.top15.k3 <- cluster.hkmeans.top15.k3 +
 
 print(cluster.hkmeans.top15.k3)
 
-# Con top15: PAM clustering 3 clusters
 
-top_actual <- top.b15
-K.num <- 3 # clusters
-var2 = 0.95
 
-pam.top15.k3 <- pam(matint_51_dico_d2d4[, top_actual], metric = "manhattan",
-                            K.num)
+print("Resultados de hkmeans.top15.k3: ")
 
-cluster.pam.top15.k3 <- fviz_cluster(pam.top15.k3, ellipse.type = "convex", 
-                                     data = matint_51_dico_d2d4[, top_actual],
-                                     ellipse.level = var2,
-                                     show.clust.cent = F, 
-                                     geom = "point",
-                                     main = "PAM - Top 15 - 3 clusters")
+# Obtener los nombres de las muestras
+sample_names <- names(hkmeans.top15.k3$cluster)
 
-# Ajustar el tamaño de los puntos según los valores de la columna "dia"
-cluster.pam.top15.k3 <- cluster.pam.top15.k3 + 
-  geom_point(data = cluster.pam.top15.k3$data, 
-             aes(x = x, y = y, color = df_unicas_d2d4$factor1,
-                 size = df_unicas_d2d4$dia)) +
-  scale_color_manual(values = c("maroon1","aquamarine3","blueviolet", "blue1",
-                                "blue4", "maroon4")) +
-  scale_size_continuous(range = c(2, 3)) +
-  labs(color = "Cluster", size = "Día") +
-  theme(legend.position = "right")
+# Calcular la tasa de acierto para las muestras que contienen "CLP_D2"
+total_CLP_D2 <- sum(grepl("CLP_D2", sample_names))
 
-print(cluster.pam.top15.k3)
+# Calcular la tasa de acierto para las muestras que contienen "CLP_D4"
+total_CLP_D4 <- sum(grepl("CLP_D4", sample_names))
+
+# Calcular la tasa de acierto para las muestras que contienen "SH"
+total_SHAM <- sum(grepl("SH", sample_names))
+
+# Muestras CLP_D2, CLP_D4 y SHAM clasificadas correctamente
+acierto_CLP_D2 <- sum(grepl("CLP_D2", sample_names) & hkmeans.top15.k3$cluster == 1)
+acierto_CLP_D4 <- sum(grepl("CLP_D4", sample_names) & hkmeans.top15.k3$cluster == 3)
+acierto_SHAM <- sum(grepl("SH", sample_names) & hkmeans.top15.k3$cluster == 2)
+
+# Totales por cluster
+total_cluster1 <- sum(hkmeans.top15.k3$cluster == 1)
+total_cluster2 <- sum(hkmeans.top15.k3$cluster == 2)
+total_cluster3 <- sum(hkmeans.top15.k3$cluster == 3)
+
+# Cálculo tasa de acierto por cluster
+tasa_acierto_CLP_D2 <- acierto_CLP_D2 / total_CLP_D2
+tasa_acierto_CLP_D4 <- acierto_CLP_D4 / total_CLP_D4
+tasa_acierto_SHAM <- acierto_SHAM / total_SHAM
+
+# Crear un dataframe con los resultados para el gráfico general
+datos_grafico_general <- data.frame(
+  Categoria = c("CLP_D2", "CLP_D4", "SHAM"),
+  Aciertos = c(acierto_CLP_D2, acierto_CLP_D4, acierto_SHAM),
+  Total = c(total_cluster1, total_cluster2, total_cluster3),
+  Tasa_Acierto = c(tasa_acierto_CLP_D2, tasa_acierto_CLP_D4, tasa_acierto_SHAM),
+  Dia = "Total"
+)
+
+# Gráfico general
+grafico_general <- ggplot(datos_grafico_general, 
+                          aes(x = Categoria, y = Tasa_Acierto, 
+                              fill = Categoria)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = sprintf("%.2f", Tasa_Acierto)), vjust = -0.5) +
+  labs(title = "Tasa de Acierto top15: HKMEANS clustering 3 clusters",
+       x = "Categoría",
+       y = "Tasa de Acierto") +
+  scale_fill_manual(values = c("CLP_D2" = "red4", "CLP_D4" = "orange4", "SHAM" = "blue4")) +
+  theme_minimal()
+
+plot(grafico_general)
+
+
+# 1. Silhouette Score
+silhouette_score <- silhouette(hkmeans.top15.k3$cluster, dist(matint_51_dico_d2d4[, top_actual]))
+fviz_silhouette(silhouette_score)
+
+
+# NOTA: Este mismo esquema con algoritmo PAM da resultados similares
+
+# # Con top15: PAM clustering 3 clusters
+# 
+# top_actual <- top.b15
+# K.num <- 3 # clusters
+# var2 = 0.95
+# 
+# pam.top15.k3 <- pam(matint_51_dico_d2d4[, top_actual], metric = "manhattan",
+#                             K.num)
+# 
+# cluster.pam.top15.k3 <- fviz_cluster(pam.top15.k3, ellipse.type = "convex", 
+#                                      data = matint_51_dico_d2d4[, top_actual],
+#                                      ellipse.level = var2,
+#                                      show.clust.cent = F, 
+#                                      geom = "point",
+#                                      main = "PAM - Top 15 - 3 clusters")
+# 
+# # Ajustar el tamaño de los puntos según los valores de la columna "dia"
+# cluster.pam.top15.k3 <- cluster.pam.top15.k3 + 
+#   geom_point(data = cluster.pam.top15.k3$data, 
+#              aes(x = x, y = y, color = df_unicas_d2d4$factor1,
+#                  size = df_unicas_d2d4$dia)) +
+#   scale_color_manual(values = c("maroon1","aquamarine3","blueviolet", "blue1",
+#                                 "blue4", "maroon4")) +
+#   scale_size_continuous(range = c(2, 3)) +
+#   labs(color = "Cluster", size = "Día") +
+#   theme(legend.position = "right")
+# 
+# print(cluster.pam.top15.k3)
 
 #
 #
