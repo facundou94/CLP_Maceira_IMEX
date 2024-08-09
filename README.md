@@ -223,7 +223,7 @@ Resultados:
    </p>
 
    <p align="center">
-   <img src='Imagenes/4_acierto_1.tiff' width='400'>
+   <img src='Imagenes/4_acierto_1.jpg' width='400'>
    </p>
    <p align="center">
      <em>Figura 12: Tasa de acierto por día</em>
@@ -255,7 +255,7 @@ Resultados:
    | BCSS    | 221   |
 
    <p align="center">
-   <img src='Imagenes/4_silueta_1.tiff' width='400'>
+   <img src='Imagenes/4_silueta_1.jpg' width='400'>
    </p>
    <p align="center">
      <em>Figura 12: Gráfica de valores silhouette para cada punto y el promedio general</em>
@@ -271,7 +271,7 @@ Resultados:
    </p>
 
    <p align="center">
-   <img src='Imagenes/4_acierto_4.jpeg' width='400'>
+   <img src='Imagenes/4_acierto_4.jpg' width='400'>
    </p>
    <p align="center">
      <em>Figura 12: Tasa de acierto por día</em>
@@ -303,11 +303,13 @@ Resultados:
    | BCSS    | 141   |
 
    <p align="center">
-   <img src='Imagenes/4_silueta_4.jpeg' width='400'>
+   <img src='Imagenes/4_silueta_4.jpg' width='400'>
    </p>
    <p align="center">
      <em>Figura 12: Gráfica de valores silhouette para cada punto y el promedio general</em>
    </p>
+
+   *Clustering - CLP vs SHAM - Días 2 y 4 - TOP 10 picos - Algoritmo: kmeans*
    
    <p align="center">
    <img src='Imagenes/4_kmeans_top10.jpg' width='400'>
@@ -315,6 +317,47 @@ Resultados:
    <p align="center">
      <em>Figura 13: Clustering - CLP vs SHAM - Días 2 y 4 - TOP 10 picos - Algoritmo: kmeans</em>
    </p>
+
+   <p align="center">
+   <img src='Imagenes/4_acierto_5.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 12: Tasa de acierto por día</em>
+   </p>
+   
+   Matriz de confusión y métricas:
+   
+   | Referencia | cluster1 | cluster2 |
+   |------------|----------|----------|
+   | SHAM       | 46       | 0        |
+   | CLP        | 10        | 51       |
+
+   | Métrica    | Valor |
+   |------------|-------|
+   | Precision: | 1.00  |
+   | Recall:    | 0.84  |
+   | F1-Score:  | 0.91  |
+   | Accuracy:  | 0.91  |
+
+   | Cluster | Tamaño | Ancho promedio silueta  |
+   |---------|--------|-------------------------|
+   | 1       | 51     | 0.36                    |
+   | 2       | 56     | 0.50                    |
+
+   | Métrica | Valor |
+   |---------|-------|
+   | VSP     | 0.43  |
+   | WCSS    | 128   |
+   | BCSS    | 117   |
+
+   <p align="center">
+   <img src='Imagenes/4_silueta_5.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 12: Gráfica de valores silhouette para cada punto y el promedio    general</em>
+   </p>
+
+   *Clustering - CLP vs SHAM - Días 2 y 4 - TOP 20 picos - Algoritmo: PAM*
 
    <p align="center">
    <img src='Imagenes/4_pam_2_clusters_4_grupos.jpg' width='400'>
