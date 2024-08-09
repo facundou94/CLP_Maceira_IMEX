@@ -693,6 +693,7 @@ Resultados:
    | WCSS    | 71    |
    | BCSS    | 155   |
 
+   </details>
 </details>
 
 ## Algoritmos Supervisados
