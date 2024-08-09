@@ -26,21 +26,29 @@
 
 ## Descripción del proyecto
 
+<details>
+  <summary>Haz clic para expandir</summary>
 <p align="justify">
 El proyecto consiste en el procesamiento y análisis de espectros MALDI-TOF obtenidos a partir de plasma de ratones a los que se le ha realizado una ligadura y punción cecal (CLP) como modelo de sepsis, y ratones impostores (SHAM). El procesamiento consiste en el filtrado, acondicionamiento y transformación de los espectros. El análisis consiste en la utilización de algoritmos de aprendizaje maquinal que permitan detectar características distintivas de estos espectros y clasificar tanto las muestras de CLP como sus diferentes estadíos dentro del modelo de la patología.
 </p>
+</details>
 
 ## Características de las muestras
 
+<details>
+  <summary>Haz clic para expandir</summary>
 * Tipo de muestras: CLP y SHAM
 * Días de adquisición: 1, 2, 4 y 7
 * Cantidad de muestras iniciales: 303
 </p>
 * Metodología de adquisición: Cada muestra es sub-dividida en "réplicas biológicas" que son depositadas cada una en un pozo o "well" del equipo. Cada una de estas wells puede ser adquirida o leída mas de una vez, obteniéndose así "réplicas técnicas". La cantidad de réplicas biológicas y técnicas por muestra es variable, llegando a un máximo de 3 de cada una. Es decir, en el caso mas extremo, una muestra podría ser replicada tres veces biológicamente, y cada una adquirida otras tres veces, llegando así a un número de nueve adquisiciones correspondientes a una misma muestra.
 </p>
+</details>
 
 ## Características y nomenclatura de los archivos
 
+<details>
+  <summary>Haz clic para expandir</summary>
 </p>
 Los lenguajes utilizados para el procesamiento y el análisis de los espectros fueron pyhton y R. Los archivos están enumerados por orden de procesamiento. A excepción del primer archivo de pre-procesamiento, los archivos están nomenclados de la siguiente manera:
 </p>
@@ -53,6 +61,7 @@ Donde
 * _alg: algoritmos utilizados, supervisados (s) o no supervisados (ns)_
 * _muestras: cantidad de muestras, indicando si se usan las réplicas biológicas (m122) o las muestras ya promediadas (m51)_
 * _dias: días utilizados para el análisis, todos (d1247) o solo días 2 y 4 (d24)_
+</details>
 
 ## Pre-procesamiento
 
@@ -459,7 +468,7 @@ Resultados:
      <em>Figura 17: Clustering - CLP vs SHAM - Días 2 y 4 - TOP 10 picos - Algoritmo: PAM</em>
    </p>
 
-      <p align="center">
+   <p align="center">
    <img src='Imagenes/4_aciertos_6.jpg' width='400'>
    </p>
    <p align="center">
