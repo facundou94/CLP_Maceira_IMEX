@@ -744,7 +744,7 @@ Resultados:
 
    *CLP_D1 + CLP_D2 vs CLP_D4 vs SHAM. Con top15: PAM clustering 3 clusters*
 
-      <p align="center">
+   <p align="center">
    <img src='Imagenes/8_grafico.jpeg' width='400'>
    </p>
    <p align="center">
