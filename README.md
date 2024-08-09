@@ -319,7 +319,7 @@ Resultados:
    </p>
 
    <p align="center">
-   <img src='Imagenes/4_acierto_5.jpg' width='400'>
+   <img src='Imagenes/4_aciertos_5.jpg' width='400'>
    </p>
    <p align="center">
      <em>Figura 12: Tasa de acierto por día</em>
@@ -367,12 +367,68 @@ Resultados:
    </p>
 
    <p align="center">
+   <img src='Imagenes/4_acierto_3.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 12: Tasa de acierto por día</em>
+   </p>
+   
+   Matriz de confusión y métricas:
+   
+   | Referencia | cluster1 | cluster2 |
+   |------------|----------|----------|
+   | SHAM       | 46       | 0        |
+   | CLP        | 17       | 44       |
+
+   | Métrica    | Valor |
+   |------------|-------|
+   | Precision: | 1.00  |
+   | Recall:    | 0.72  |
+   | F1-Score:  | 0.84  |
+   | Accuracy:  | 0.84  |
+
+   | Cluster | Tamaño | Ancho promedio silueta  |
+   |---------|--------|-------------------------|
+   | 1       | 63     | 0.32                    |
+   | 2       | 44     | 0.29                    |
+
+   | Métrica | Valor |
+   |---------|-------|
+   | VSP     | 0.30  |
+   | WCSS    | 432   |
+   | BCSS    | 423   |
+
+   <p align="center">
+   <img src='Imagenes/4_silueta_3.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 12: Gráfica de valores silhouette para cada punto y el promedio    general</em>
+   </p>
+
+   *Clustering - CLP vs SHAM - Días 2 y 4 - 3 clusters - TOP 20 picos - Algoritmo: PAM*
+
+   <p align="center">
    <img src='Imagenes/4_pam_3_clusters_4_grupos.jpg' width='400'>
    </p>
    <p align="center">
      <em>Figura 15: Clustering - CLP vs SHAM - Días 2 y 4 - 3 clusters - TOP 20 picos - Algoritmo: PAM</em>
    </p>
 
+   <p align="center">
+   <img src='Imagenes/4_silueta_3.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 12: Gráfica de valores silhouette para cada punto y el promedio    general</em>
+   </p>
+
+   | Cluster | Tamaño | Ancho promedio silueta  |
+   |---------|--------|-------------------------|
+   | 1       | 42     | 0.24                    |
+   | 2       | 42     | 0.24                    |
+   | 3       | 23     | 0.39                    |
+
+   *Clustering - CLP vs SHAM - Días 2 y 4 - 3 clusters - TOP 30 picos - Algoritmo: PAM*
+   
    <p align="center">
    <img src='Imagenes/4_pam_3_grupos_3_clusters.jpg' width='400'>
    </p>
@@ -381,12 +437,66 @@ Resultados:
    </p>
 
    <p align="center">
+   <img src='Imagenes/4_silueta_7.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 12: Gráfica de valores silhouette para cada punto y el promedio    general</em>
+   </p>
+
+   | Cluster | Tamaño | Ancho promedio silueta  |
+   |---------|--------|-------------------------|
+   | 1       | 20     | 0.21                    |
+   | 2       | 32     | 0.18                    |
+   | 3       | 55     | 0.39                    |
+
+
+   *Clustering - CLP vs SHAM - Días 2 y 4 - TOP 10 picos - Algoritmo: PAM*
+   
+   <p align="center">
    <img src='Imagenes/4_pam_top10.jpg' width='400'>
    </p>
    <p align="center">
      <em>Figura 17: Clustering - CLP vs SHAM - Días 2 y 4 - TOP 10 picos - Algoritmo: PAM</em>
    </p>
+
+      <p align="center">
+   <img src='Imagenes/4_acierto_6.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 12: Tasa de acierto por día</em>
+   </p>
    
+   Matriz de confusión y métricas:
+   
+   | Referencia | cluster1 | cluster2 |
+   |------------|----------|----------|
+   | SHAM       | 46       | 0        |
+   | CLP        | 10       | 51       |
+
+   | Métrica    | Valor |
+   |------------|-------|
+   | Precision: | 1.00  |
+   | Recall:    | 0.84  |
+   | F1-Score:  | 0.91  |
+   | Accuracy:  | 0.91  |
+
+   | Cluster | Tamaño | Ancho promedio silueta  |
+   |---------|--------|-------------------------|
+   | 1       | 51     | 0.36                    |
+   | 2       | 56     | 0.50                    |
+
+   | Métrica | Valor |
+   |---------|-------|
+   | VSP     | 0.43  |
+   | WCSS    | 177   |
+   | BCSS    | 260   |
+
+   <p align="center">
+   <img src='Imagenes/4_silueta_6.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 12: Gráfica de valores silhouette para cada punto y el promedio    general</em>
+   </p>
 
    ### Archivo: 5_ns_m51_d24
 
