@@ -162,7 +162,10 @@ El procedimiento para la realización de los algoritmos No Supervisados fue el s
 Resultados:
 
    ### Archivo: 2_ns_m122_d1247
-
+   
+   <details>
+     <summary>Expandir</summary>
+      
    <p align="center">
    <img src='Imagenes/2_ranking_picos.jpeg' width='400'>
    </p>
@@ -224,6 +227,8 @@ Resultados:
    | Recall:    | 0.89  |
    | F1-Score:  | 0.93  |
    | Accuracy:  | 0.93  |
+   
+   </details>
 
    ### Archivo: 4_ns_m122_d24
 
