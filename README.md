@@ -460,7 +460,7 @@ Resultados:
    </p>
 
       <p align="center">
-   <img src='Imagenes/4_acierto_6.jpg' width='400'>
+   <img src='Imagenes/4_aciertos_6.jpg' width='400'>
    </p>
    <p align="center">
      <em>Figura 12: Tasa de acierto por día</em>
