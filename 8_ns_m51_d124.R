@@ -134,7 +134,7 @@ cluster.kmeans.top10.k2 <- fviz_cluster(kmeans.top10.k2, ellipse.type = "convex"
                                          ellipse.level = var2,
                                          show.clust.cent = F, 
                                          geom = "point", 
-                                         main = "hkmeans - Top 15 - 3 clusters")
+                                         main = "top10: KMEANS clustering 2 clusters")
 
 # Ajustar el tamaño de los puntos según los valores de la columna "dia"
 cluster.kmeans.top10.k2 <- cluster.kmeans.top10.k2 + 
@@ -165,7 +165,7 @@ cluster.hkmeans.top15.k2 <- fviz_cluster(hkmeans.top15.k2, ellipse.type = "conve
                                         ellipse.level = var2,
                                         show.clust.cent = F, 
                                         geom = "point", 
-                                        main = "hkmeans - Top 15 - 3 clusters")
+                                        main = "top15: HKMEANS clustering 2 clusters")
 
 # Ajustar el tamaño de los puntos según los valores de la columna "dia"
 cluster.hkmeans.top15.k2 <- cluster.hkmeans.top15.k2 + 
@@ -195,7 +195,7 @@ cluster.hkmeans.top20.k2 <- fviz_cluster(hkmeans.top20.k2, ellipse.type = "conve
                                          ellipse.level = var2,
                                          show.clust.cent = F, 
                                          geom = "point", 
-                                         main = "hkmeans - Top 15 - 3 clusters")
+                                         main = "top20: HKMEANS clustering 2 clusters")
 
 # Ajustar el tamaño de los puntos según los valores de la columna "dia"
 cluster.hkmeans.top20.k2 <- cluster.hkmeans.top20.k2 + 
@@ -225,7 +225,7 @@ cluster.pam.top20.k3 <- fviz_cluster(pam.top20.k3, ellipse.type = "convex",
                                          ellipse.level = var2,
                                          show.clust.cent = F, 
                                          geom = "point", 
-                                         main = "hkmeans - Top 15 - 3 clusters")
+                                         main = "top20: PAM clustering 3 clusters")
 
 # Ajustar el tamaño de los puntos según los valores de la columna "dia"
 cluster.pam.top20.k3 <- cluster.pam.top20.k3 + 
@@ -239,3 +239,61 @@ cluster.pam.top20.k3 <- cluster.pam.top20.k3 +
   theme(legend.position = "right")
 
 print(cluster.pam.top20.k3)
+
+
+print("Resultados de cluster.pam.top20.k3: ")
+
+# Obtener los nombres de las muestras
+sample_names <- names(pam.top20.k3$clustering)
+
+# Calcular la tasa de acierto para las muestras que contienen "CLP_D2"
+total_CLP_D1_D2 <- sum(grepl("CLP_D2|CLP_D1", sample_names))
+
+# Calcular la tasa de acierto para las muestras que contienen "CLP_D4"
+total_CLP_D4 <- sum(grepl("CLP_D4", sample_names))
+
+# Calcular la tasa de acierto para las muestras que contienen "SH"
+total_SHAM <- sum(grepl("SH", sample_names))
+
+# Muestras CLP_D2, CLP_D4 y SHAM clasificadas correctamente
+acierto_CLP_D1_D2 <- sum(grepl("CLP_D2|CLP_D1", sample_names) & pam.top20.k3$clustering == 1)
+acierto_CLP_D4 <- sum(grepl("CLP_D4", sample_names) & pam.top20.k3$clustering == 3)
+acierto_SHAM <- sum(grepl("SH", sample_names) & pam.top20.k3$clustering == 2)
+
+# Totales por cluster
+total_cluster1 <- sum(pam.top20.k3$clustering == 1)
+total_cluster2 <- sum(pam.top20.k3$clustering == 2)
+total_cluster3 <- sum(pam.top20.k3$clustering == 3)
+
+# Cálculo tasa de acierto por cluster
+tasa_acierto_CLP_D1_D2 <- acierto_CLP_D1_D2 / total_CLP_D1_D2
+tasa_acierto_CLP_D4 <- acierto_CLP_D4 / total_CLP_D4
+tasa_acierto_SHAM <- acierto_SHAM / total_SHAM
+
+# Crear un dataframe con los resultados para el gráfico general
+datos_grafico_general <- data.frame(
+  Categoria = c("CLP_D1_D2", "CLP_D4", "SH"),
+  Aciertos = c(acierto_CLP_D1_D2, acierto_CLP_D4, acierto_SHAM),
+  Total = c(total_cluster1, total_cluster2, total_cluster3),
+  Tasa_Acierto = c(tasa_acierto_CLP_D1_D2, tasa_acierto_CLP_D4, tasa_acierto_SHAM),
+  Dia = "Total"
+)
+
+# Gráfico general
+grafico_general <- ggplot(datos_grafico_general, 
+                          aes(x = Categoria, y = Tasa_Acierto, 
+                              fill = Categoria)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = sprintf("%.2f", Tasa_Acierto)), vjust = -0.5) +
+  labs(title = "Tasa de Acierto por grupo",
+       x = "Categoría",
+       y = "Tasa de Acierto") +
+  scale_fill_manual(values = c("CLP_D1_D2" = "red4", "CLP_D4" = "orange4", "SH" = "blue4")) +
+  theme_minimal()
+
+plot(grafico_general)
+
+
+# 1. Silhouette Score
+silhouette_score <- silhouette(pam.top20.k3$cluster, dist(matint_51_dico_d1d2d4[, top_actual]))
+fviz_silhouette(silhouette_score)

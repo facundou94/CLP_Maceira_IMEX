@@ -157,92 +157,161 @@ cluster.kmeans.top15.k3 <- cluster.kmeans.top15.k3 +
 
 print(cluster.kmeans.top15.k3)
 
-# Con top15: HKMEANS clustering 2 clusters
-top_actual <- top.b15
-K.num <- 2 # clusters
-var2 = 0.95
+print("Resultados de kmeans.top15.k3: ")
 
-hkmeans.top15.k2 <- hkmeans(matint_122_dico_d1d2d4[, top_actual], 
-                           K.num)
+# Obtener los nombres de las muestras
+sample_names <- names(kmeans.top15.k3$cluster)
 
-cluster.hkmeans.top15.k2 <- fviz_cluster(
-  hkmeans.top15.k2, 
-  ellipse.type = "convex", 
-  data = matint_122_dico_d1d2d4[, top_actual],
-  ellipse.level = var2,
-  show.clust.cent = F, 
-  geom = "point", 
-  main = "kmeans - Top 15 - 3 clusters")
+# Calcular la tasa de acierto para las muestras que contienen "CLP_D2"
+total_CLP_D1_D2 <- sum(grepl("CLP_D2|CLP_D1", sample_names))
 
-cluster.hkmeans.top15.k2 <- cluster.hkmeans.top15.k2 + 
-  geom_point(data = cluster.hkmeans.top15.k2$data, 
-             aes(x = x, y = y, color = df_prom_rep_d1d2d4$factor5, 
-                 size = df_prom_rep_d1d2d4$dia)) +
-  scale_color_manual(values = c("blueviolet","aquamarine3","maroon1", "maroon4", 
-                                "blue1","blue4")) +
-  scale_size_continuous(range = c(2, 3)) +
-  labs(color = "Cluster", size = "Día") +  
-  theme(legend.position = "right")
+# Calcular la tasa de acierto para las muestras que contienen "CLP_D4"
+total_CLP_D4 <- sum(grepl("CLP_D4", sample_names))
 
-print(cluster.hkmeans.top15.k2)
+# Calcular la tasa de acierto para las muestras que contienen "SH"
+total_SHAM <- sum(grepl("SH", sample_names))
 
+# Muestras CLP_D2, CLP_D4 y SHAM clasificadas correctamente
+# OJO! en tiempo de ejecución pueden cambiar los clust. chequear manualmente
+acierto_CLP_D1_D2 <- sum(grepl("CLP_D2|CLP_D1", sample_names) & kmeans.top15.k3$cluster == 2)
+acierto_CLP_D4 <- sum(grepl("CLP_D4", sample_names) & kmeans.top15.k3$cluster == 3)
+acierto_SHAM <- sum(grepl("SH", sample_names) & kmeans.top15.k3$cluster == 1)
 
+# Totales por cluster
+total_cluster1 <- sum(kmeans.top15.k3$cluster == 1)
+total_cluster2 <- sum(kmeans.top15.k3$cluster == 2)
+total_cluster3 <- sum(kmeans.top15.k3$cluster == 3)
 
-# Con top20: PAM 2 clusters
-top_actual <- top.b20
-K.num <- 2 # clusters
-var2 = 0.95
+# Cálculo tasa de acierto por cluster
+tasa_acierto_CLP_D1_D2 <- acierto_CLP_D1_D2 / total_CLP_D1_D2
+tasa_acierto_CLP_D4 <- acierto_CLP_D4 / total_CLP_D4
+tasa_acierto_SHAM <- acierto_SHAM / total_SHAM
 
-pam.top20.k2 <- pam(matint_122_dico_d1d2d4[, top_actual], 
-                           K.num)
+# Crear un dataframe con los resultados para el gráfico general
+datos_grafico_general <- data.frame(
+  Categoria = c("CLP_D1_D2", "CLP_D4", "SHAM"),
+  Aciertos = c(acierto_CLP_D1_D2, acierto_CLP_D4, acierto_SHAM),
+  Total = c(total_cluster1, total_cluster2, total_cluster3),
+  Tasa_Acierto = c(tasa_acierto_CLP_D1_D2, tasa_acierto_CLP_D4, tasa_acierto_SHAM),
+  Dia = "Total"
+)
 
-cluster.pam.top20.k2 <- fviz_cluster(
-  pam.top20.k2, 
-  ellipse.type = "convex", 
-  data = matint_122_dico_d1d2d4[, top_actual],
-  ellipse.level = var2,
-  show.clust.cent = F, 
-  geom = "point", 
-  main = "PAM - Top 20 - 2 clusters")
+# Gráfico general
+grafico_general <- ggplot(datos_grafico_general, 
+                          aes(x = Categoria, y = Tasa_Acierto, 
+                              fill = Categoria)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = sprintf("%.2f", Tasa_Acierto)), vjust = -0.5) +
+  labs(title = "Tasa de Acierto top15: KMEANS clustering 3 clusters",
+       x = "Categoría",
+       y = "Tasa de Acierto") +
+  scale_fill_manual(values = c("CLP_D1_D2" = "red4", "CLP_D4" = "orange4", "SHAM" = "blue4")) +
+  theme_minimal()
 
-cluster.pam.top20.k2 <- cluster.pam.top20.k2 + 
-  geom_point(data = cluster.pam.top20.k2$data, 
-             aes(x = x, y = y, color = df_prom_rep_d1d2d4$factor5, 
-                 size = df_prom_rep_d1d2d4$dia)) +
-  scale_color_manual(values = c("blueviolet","maroon1", "maroon4", 
-                                "blue1","blue4")) +
-  scale_size_continuous(range = c(2, 3)) +
-  labs(color = "Cluster", size = "Día") +  
-  theme(legend.position = "right")
-
-print(cluster.pam.top20.k2)
+plot(grafico_general)
 
 
-# Con top20: kmeans 3 clusters
-top_actual <- top.b20
-K.num <- 3 # clusters
-var2 = 0.95
+# 1. Silhouette Score
+silhouette_score <- silhouette(kmeans.top15.k3$cluster, dist(matint_122_dico_d1d2d4[, top_actual]))
+fviz_silhouette(silhouette_score)
 
-kmeans.top20.k3 <- kmeans(matint_122_dico_d1d2d4[, top_actual], 
-                       K.num)
+# 2. Within-cluster Sum of Squares (WCSS)
+wcss <- kmeans.top15.k3$tot.withinss
+print(wcss)
 
-cluster.kmeans.top20.k3 <- fviz_cluster(
-  kmeans.top20.k3, 
-  ellipse.type = "convex", 
-  data = matint_122_dico_d1d2d4[, top_actual],
-  ellipse.level = var2,
-  show.clust.cent = F, 
-  geom = "point", 
-  main = "kmeans - Top 20 - 3 clusters")
+# 3. Between-cluster Sum of Squares (BCSS)
+bcss <- kmeans.top15.k3$betweenss
+print(bcss)
 
-cluster.kmeans.top20.k3 <- cluster.kmeans.top20.k3 + 
-  geom_point(data = cluster.kmeans.top20.k3$data, 
-             aes(x = x, y = y, color = df_prom_rep_d1d2d4$factor5, 
-                 size = df_prom_rep_d1d2d4$dia)) +
-  scale_color_manual(values = c("blueviolet","aquamarine3","maroon1", "maroon4", 
-                                "blue1","blue4")) +
-  scale_size_continuous(range = c(2, 3)) +
-  labs(color = "Cluster", size = "Día") +  
-  theme(legend.position = "right")
 
-print(cluster.kmeans.top20.k3)
+# NOTA: Comentados otros análisis que no dieron buenos resultados
+
+# # Con top15: HKMEANS clustering 2 clusters
+# top_actual <- top.b15
+# K.num <- 2 # clusters
+# var2 = 0.95
+# 
+# hkmeans.top15.k2 <- hkmeans(matint_122_dico_d1d2d4[, top_actual], 
+#                            K.num)
+# 
+# cluster.hkmeans.top15.k2 <- fviz_cluster(
+#   hkmeans.top15.k2, 
+#   ellipse.type = "convex", 
+#   data = matint_122_dico_d1d2d4[, top_actual],
+#   ellipse.level = var2,
+#   show.clust.cent = F, 
+#   geom = "point", 
+#   main = "kmeans - Top 15 - 3 clusters")
+# 
+# cluster.hkmeans.top15.k2 <- cluster.hkmeans.top15.k2 + 
+#   geom_point(data = cluster.hkmeans.top15.k2$data, 
+#              aes(x = x, y = y, color = df_prom_rep_d1d2d4$factor5, 
+#                  size = df_prom_rep_d1d2d4$dia)) +
+#   scale_color_manual(values = c("blueviolet","aquamarine3","maroon1", "maroon4", 
+#                                 "blue1","blue4")) +
+#   scale_size_continuous(range = c(2, 3)) +
+#   labs(color = "Cluster", size = "Día") +  
+#   theme(legend.position = "right")
+# 
+# print(cluster.hkmeans.top15.k2)
+# 
+# 
+# 
+# # Con top20: PAM 2 clusters
+# top_actual <- top.b20
+# K.num <- 2 # clusters
+# var2 = 0.95
+# 
+# pam.top20.k2 <- pam(matint_122_dico_d1d2d4[, top_actual], 
+#                            K.num)
+# 
+# cluster.pam.top20.k2 <- fviz_cluster(
+#   pam.top20.k2, 
+#   ellipse.type = "convex", 
+#   data = matint_122_dico_d1d2d4[, top_actual],
+#   ellipse.level = var2,
+#   show.clust.cent = F, 
+#   geom = "point", 
+#   main = "PAM - Top 20 - 2 clusters")
+# 
+# cluster.pam.top20.k2 <- cluster.pam.top20.k2 + 
+#   geom_point(data = cluster.pam.top20.k2$data, 
+#              aes(x = x, y = y, color = df_prom_rep_d1d2d4$factor5, 
+#                  size = df_prom_rep_d1d2d4$dia)) +
+#   scale_color_manual(values = c("blueviolet","maroon1", "maroon4", 
+#                                 "blue1","blue4")) +
+#   scale_size_continuous(range = c(2, 3)) +
+#   labs(color = "Cluster", size = "Día") +  
+#   theme(legend.position = "right")
+# 
+# print(cluster.pam.top20.k2)
+# 
+# 
+# # Con top20: kmeans 3 clusters
+# top_actual <- top.b20
+# K.num <- 3 # clusters
+# var2 = 0.95
+# 
+# kmeans.top20.k3 <- kmeans(matint_122_dico_d1d2d4[, top_actual], 
+#                        K.num)
+# 
+# cluster.kmeans.top20.k3 <- fviz_cluster(
+#   kmeans.top20.k3, 
+#   ellipse.type = "convex", 
+#   data = matint_122_dico_d1d2d4[, top_actual],
+#   ellipse.level = var2,
+#   show.clust.cent = F, 
+#   geom = "point", 
+#   main = "kmeans - Top 20 - 3 clusters")
+# 
+# cluster.kmeans.top20.k3 <- cluster.kmeans.top20.k3 + 
+#   geom_point(data = cluster.kmeans.top20.k3$data, 
+#              aes(x = x, y = y, color = df_prom_rep_d1d2d4$factor5, 
+#                  size = df_prom_rep_d1d2d4$dia)) +
+#   scale_color_manual(values = c("blueviolet","aquamarine3","maroon1", "maroon4", 
+#                                 "blue1","blue4")) +
+#   scale_size_continuous(range = c(2, 3)) +
+#   labs(color = "Cluster", size = "Día") +  
+#   theme(legend.position = "right")
+# 
+# print(cluster.kmeans.top20.k3)
