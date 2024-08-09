@@ -694,6 +694,85 @@ Resultados:
    | BCSS    | 155   |
 
    </details>
+
+   ### Archivo: 7_ns_m122_d124
+
+   <details>
+        <summary>Expandir</summary>
+
+   *CLP_D1 + CLP_D2 vs CLP_D4 vs SHAM. Con top15: KMEANS clustering 3 clusters*
+
+   <p align="center">
+   <img src='Imagenes/7_grafico.jpeg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 25:  CLP_D1 + CLP_D2 vs CLP_D4 vs SHAM. Con top15: KMEANS clustering 3 clusters</em>
+   </p>
+
+   <p align="center">
+   <img src='Imagenes/7_aciertos.jpeg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 21:  Tasa de acierto por grupo </em>
+   </p>
+
+   | Cluster | Tamaño | Ancho promedio silueta  |
+   |---------|--------|-------------------------|
+   | 1       | 28     | 0.27                    |
+   | 2       | 42     | 0.27                    |
+   | 3       | 47     | 0.13                    |
+
+   | Métrica | Valor |
+   |---------|-------|
+   | VSP     | 0.21  |
+   | WCSS    | 215   |
+   | BCSS    | 123   |
+
+   <p align="center">
+   <img src='Imagenes/7_siluetas.jpeg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 31: Gráfica de valores silhouette para cada punto y el promedio general</em>
+   </p>
+   
+   </details>
+
+   ### Archivo: 8_ns_m51_d124
+
+   <details>
+        <summary>Expandir</summary>
+
+   *CLP_D1 + CLP_D2 vs CLP_D4 vs SHAM. Con top15: PAM clustering 3 clusters*
+
+      <p align="center">
+   <img src='Imagenes/8_grafico.jpeg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 25:  CLP_D1 + CLP_D2 vs CLP_D4 vs SHAM. Con top15: PAM clustering 3 clusters</em>
+   </p>
+
+   <p align="center">
+   <img src='Imagenes/8_aciertos.jpeg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 21:  Tasa de acierto por grupo </em>
+   </p>
+
+   | Cluster | Tamaño | Ancho promedio silueta  |
+   |---------|--------|-------------------------|
+   | 1       | 17     | 0.12                    |
+   | 2       | 21     | 0.38                    |
+   | 3       | 10     | 0.43                    |
+
+   <p align="center">
+   <img src='Imagenes/8_siluetas.jpeg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 31: Gráfica de valores silhouette para cada punto y el promedio general</em>
+   </p>
+   
+   </details>
+   
 </details>
 
 ## Algoritmos Supervisados
@@ -753,3 +832,5 @@ Resultados:
    </p>
 
 ## Conclusión
+
+   Análisis finalizado
