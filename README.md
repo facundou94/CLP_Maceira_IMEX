@@ -580,6 +580,11 @@ Resultados:
    
    ### Archivo: 6_ns_m51_vs_varios
 
+   <details>
+        <summary>Expandir</summary>
+
+   *CLP_D2 vs CLP_D4 - TOP 15 picos - 2 CLUSTERS - Algoritmo: PAM*
+   
    <p align="center">
    <img src='Imagenes/6_picos_clpd2d4.jpg' width='400'>
    </p>
@@ -595,6 +600,37 @@ Resultados:
    </p>
 
    <p align="center">
+   <img src='Imagenes/6_acierto_1.jpeg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 21:  Tasa de acierto por grupo </em>
+   </p>
+
+   | Cluster | Tamaño | Ancho promedio silueta  |
+   |---------|--------|-------------------------|
+   | 1       | 11     | 0.32                    |
+   | 2       | 14     | 0.33                    |
+
+   | Métrica | Valor |
+   |---------|-------|
+   | VSP     | 0.32  |
+   | WCSS    | 76    |
+   | BCSS    | 95    |
+
+   <p align="center">
+   <img src='Imagenes/6_silueta_1.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 31: Gráfica de valores silhouette para cada punto y el promedio general</em>
+   </p>
+   </details>
+
+   <details>
+        <summary>Expandir</summary>
+   
+   *Clustering - CLP_D2 vs SHAM_D2 - TOP 20 picos - 2 CLUSTERS - Algoritmo: PAM*
+   
+   <p align="center">
    <img src='Imagenes/6_picos_clp_sham_d2.jpg' width='400'>
    </p>
    <p align="center">
@@ -607,7 +643,12 @@ Resultados:
    <p align="center">
      <em>Figura 23:  Clustering - CLP_D2 vs SHAM_D2 - TOP 20 picos - 2 CLUSTERS - Algoritmo: PAM</em>
    </p>
-
+   </details>
+   
+   <details>
+        <summary>Expandir</summary>
+   *Clustering - CLP_D4 vs SHAM_D4 - TOP 15 picos - 2 CLUSTERS - Algoritmo: PAM*
+   
    <p align="center">
    <img src='Imagenes/6_picos_clp_sham_d4.jpg' width='400'>
    </p>
@@ -621,6 +662,51 @@ Resultados:
    <p align="center">
      <em>Figura 25:  Clustering - CLP_D4 vs SHAM_D4 - TOP 15 picos - 2 CLUSTERS - Algoritmo: PAM</em>
    </p>
+
+   <p align="center">
+   <img src='Imagenes/6_aciertos_2.jpeg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 21:  Tasa de acierto por grupo </em>
+   </p>
+
+   | Referencia | cluster1 | cluster2 |
+   |------------|----------|----------|
+   | SHAM       | 13       | 0        |
+   | CLP        | 1        | 16       |
+
+   | Métrica    | Valor |
+   |------------|-------|
+   | Precision: | 1.00  |
+   | Recall:    | 0.94  |
+   | F1-Score:  | 0.97  |
+   | Accuracy:  | 0.97  |
+
+   <p align="center">
+   <img src='Imagenes/6_siluetas_2.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 31: Gráfica de valores silhouette para cada punto y el promedio general</em>
+   </p>
+   
+   | Cluster | Tamaño | Ancho promedio silueta  |
+   |---------|--------|-------------------------|
+   | 1       | 16     | 0.53                    |
+   | 2       | 14     | 0.51                    |
+
+   | Métrica | Valor |
+   |---------|-------|
+   | VSP     | 0.52  |
+   | WCSS    | 71    |
+   | BCSS    | 155   |
+
+   <p align="center">
+   <img src='Imagenes/6_silueta_1.jpg' width='400'>
+   </p>
+   <p align="center">
+     <em>Figura 31: Gráfica de valores silhouette para cada punto y el promedio general</em>
+   </p>
+   </details>
 </details>
 
 ## Algoritmos Supervisados
