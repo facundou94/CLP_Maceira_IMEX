@@ -812,25 +812,6 @@ Resultados:
    <p align="center">
      <em>Figura 27:  Matriz de confusión de la Regresión Logística</em>
    </p>
-
-   Precisión: 0.89
-Sensibilidad: 0.86
-Puntaje F1: 0.85
-ROC AUC: 0.84
-
-Reporte de Clasificación:
-              precision    recall  f1-score   support
-
-      CLP_D2       1.00      0.56      0.71         9
-      CLP_D4       0.94      0.88      0.91        17
-          SH       0.77      1.00      0.87        17
-
-    accuracy                           0.86        43
-   macro avg       0.90      0.81      0.83        43
-weighted avg       0.89      0.86      0.85        43
-
-
-
    
    3) <p align="justify">Se entrenó un modelo de Random Forest</p>
 
