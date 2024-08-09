@@ -28,6 +28,7 @@
 
 <details>
   <summary>Haz clic para expandir</summary>
+
 <p align="justify">
 El proyecto consiste en el procesamiento y análisis de espectros MALDI-TOF obtenidos a partir de plasma de ratones a los que se le ha realizado una ligadura y punción cecal (CLP) como modelo de sepsis, y ratones impostores (SHAM). El procesamiento consiste en el filtrado, acondicionamiento y transformación de los espectros. El análisis consiste en la utilización de algoritmos de aprendizaje maquinal que permitan detectar características distintivas de estos espectros y clasificar tanto las muestras de CLP como sus diferentes estadíos dentro del modelo de la patología.
 </p>
@@ -37,6 +38,7 @@ El proyecto consiste en el procesamiento y análisis de espectros MALDI-TOF obte
 
 <details>
   <summary>Haz clic para expandir</summary>
+
 * Tipo de muestras: CLP y SHAM
 * Días de adquisición: 1, 2, 4 y 7
 * Cantidad de muestras iniciales: 303
@@ -49,6 +51,7 @@ El proyecto consiste en el procesamiento y análisis de espectros MALDI-TOF obte
 
 <details>
   <summary>Haz clic para expandir</summary>
+
 </p>
 Los lenguajes utilizados para el procesamiento y el análisis de los espectros fueron pyhton y R. Los archivos están enumerados por orden de procesamiento. A excepción del primer archivo de pre-procesamiento, los archivos están nomenclados de la siguiente manera:
 </p>
@@ -64,6 +67,9 @@ Donde
 </details>
 
 ## Pre-procesamiento
+
+<details>
+  <summary>Haz clic para expandir</summary>
 
 ### Archivo: 1_preprocesamiento.R
 
@@ -125,17 +131,25 @@ El pre-procesamiento está compuesto por las siguientes etapas:
 
    
 * <p align="justify">Por último, guardar las matrices y los metadatos. Se obtienen matrices de intensidades y dicotómicas tanto para las muestras individuales (matriz de 51 filas x 218 columnas) como para las réplicas biológicas (matriz de 122 filas x 218 columnas)</p>
+</details>
 
 ## Seguimiento de cantidad de muestras
 
+<details>
+  <summary>Haz clic para expandir</summary>
+   
 * Muestras iniciales o réplicas técnicas: 303
 * Réplicas técnicas luego de control de calidad: 297
    * Réplicas biológicas: 122
    * Réplicas biológicas de días 2 y 4: 107
       * Muestras biológicas independientes: 55
       * Muestras biológicas independientes de días 2 y 4: 43
+</details>
 
 ## Algoritmos No Supervisados
+
+<details>
+  <summary>Haz clic para expandir</summary>
 
 El procedimiento para la realización de los algoritmos No Supervisados fue el siguiente:
    1) Elección de conjunto de muestras (Réplicas biológicas o muestras independientes)
@@ -567,7 +581,8 @@ Resultados:
    <p align="center">
      <em>Figura 25:  Clustering - CLP_D4 vs SHAM_D4 - TOP 15 picos - 2 CLUSTERS - Algoritmo: PAM</em>
    </p>
-   
+</details>
+
 ## Algoritmos Supervisados
 
    ### Archivo: 3_s_m122_d1247.R
