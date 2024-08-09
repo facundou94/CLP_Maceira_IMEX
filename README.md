@@ -800,6 +800,7 @@ Resultados:
    ### Archivo: 7_s_m107_d24_top15.ipynb
 
    Se probaron modelos de aprendizaje supervisado con 107 réplicas biológicas correspondiente a los días 2 y 4.
+   NOTA: Los resultados de las métricas de cada modelo se encuentran detallados en el archivo de jupyter
 
    1) <p align="justify">Se representaron los porcentajes de muestras correspondiente a cada tipo de factor (CLP_D2, CLP_D4 y SHAM)</p>
    2) <p align="justify">Se entrenó un modelo de Regresión Logística</p>
