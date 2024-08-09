@@ -27,7 +27,7 @@
 ## Descripción del proyecto
 
 <details>
-  <summary>Haz clic para expandir</summary>
+  <summary>Expandir</summary>
 
 <p align="justify">
 El proyecto consiste en el procesamiento y análisis de espectros MALDI-TOF obtenidos a partir de plasma de ratones a los que se le ha realizado una ligadura y punción cecal (CLP) como modelo de sepsis, y ratones impostores (SHAM). El procesamiento consiste en el filtrado, acondicionamiento y transformación de los espectros. El análisis consiste en la utilización de algoritmos de aprendizaje maquinal que permitan detectar características distintivas de estos espectros y clasificar tanto las muestras de CLP como sus diferentes estadíos dentro del modelo de la patología.
@@ -37,7 +37,7 @@ El proyecto consiste en el procesamiento y análisis de espectros MALDI-TOF obte
 ## Características de las muestras
 
 <details>
-  <summary>Haz clic para expandir</summary>
+  <summary>Expandir</summary>
 
 * Tipo de muestras: CLP y SHAM
 * Días de adquisición: 1, 2, 4 y 7
@@ -50,7 +50,7 @@ El proyecto consiste en el procesamiento y análisis de espectros MALDI-TOF obte
 ## Características y nomenclatura de los archivos
 
 <details>
-  <summary>Haz clic para expandir</summary>
+  <summary>Expandir</summary>
 
 </p>
 Los lenguajes utilizados para el procesamiento y el análisis de los espectros fueron pyhton y R. Los archivos están enumerados por orden de procesamiento. A excepción del primer archivo de pre-procesamiento, los archivos están nomenclados de la siguiente manera:
@@ -69,7 +69,7 @@ Donde
 ## Pre-procesamiento
 
 <details>
-  <summary>Haz clic para expandir</summary>
+  <summary>Expandir</summary>
 
 ### Archivo: 1_preprocesamiento.R
 
@@ -136,7 +136,7 @@ El pre-procesamiento está compuesto por las siguientes etapas:
 ## Seguimiento de cantidad de muestras
 
 <details>
-  <summary>Haz clic para expandir</summary>
+  <summary>Expandir</summary>
    
 * Muestras iniciales o réplicas técnicas: 303
 * Réplicas técnicas luego de control de calidad: 297
@@ -149,7 +149,7 @@ El pre-procesamiento está compuesto por las siguientes etapas:
 ## Algoritmos No Supervisados
 
 <details>
-  <summary>Haz clic para expandir</summary>
+  <summary>Expandir</summary>
 
 El procedimiento para la realización de los algoritmos No Supervisados fue el siguiente:
    1) Elección de conjunto de muestras (Réplicas biológicas o muestras independientes)
@@ -193,7 +193,6 @@ Resultados:
 
    Métricas:
    
-   <p align="center">
    | Cluster | Tamaño | Ancho promedio silueta  |
    |---------|--------|-------------------------|
    | 1       | 56     | 0.38                    |
@@ -204,7 +203,6 @@ Resultados:
    | VSP     | 0.34  |
    | WCSS    | 343   |
    | BCSS    | 216   |
-   </p>
    
    <p align="center">
    <img src='Imagenes/2_silueta.jpeg' width='400'>
@@ -214,7 +212,6 @@ Resultados:
    </p>
 
    Matriz de confusión y métricas:
-   
                 
    | Referencia | cluster1 | cluster2 |
    |------------|----------|----------|
@@ -228,14 +225,16 @@ Resultados:
    | F1-Score:  | 0.93  |
    | Accuracy:  | 0.93  |
 
-   
    ### Archivo: 4_ns_m122_d24
 
+   <details>
+     <summary>Haz clic para expandir</summary>
+   
    <p align="center">
    <img src='Imagenes/4_picos_4clusters.jpeg' width='400'>
    </p>
    <p align="center">
-     <em>Figura 11: Picos mas preponderantes seleccionados por el algoritmo bindaranking a partir del factor CLP_D2 vs CLP_D4 vs SHAM_D4 vs SHAM_D2</em>
+     <em>Figura 12: Picos mas preponderantes seleccionados por el algoritmo bindaranking a partir del factor CLP_D2 vs CLP_D4 vs SHAM_D4 vs SHAM_D2</em>
    </p>
 
    *Clustering - CLP vs SHAM - Días 2 y 4 - TOP 30 picos - Algoritmo: Hkmeans*
@@ -244,14 +243,14 @@ Resultados:
    <img src='Imagenes/4_hkmeans_4_grupos.jpg' width='400'>
    </p>
    <p align="center">
-     <em>Figura 12: Clustering - CLP vs SHAM - Días 2 y 4 - TOP 30 picos - Algoritmo: Hkmeans</em>
+     <em>Figura 13: Clustering - CLP vs SHAM - Días 2 y 4 - TOP 30 picos - Algoritmo: Hkmeans</em>
    </p>
 
    <p align="center">
    <img src='Imagenes/4_acierto_1.jpg' width='400'>
    </p>
    <p align="center">
-     <em>Figura 12: Tasa de acierto por día</em>
+     <em>Figura 14: Tasa de acierto por grupo</em>
    </p>
 
    Matriz de confusión y métricas:
@@ -283,7 +282,7 @@ Resultados:
    <img src='Imagenes/4_silueta_1.jpg' width='400'>
    </p>
    <p align="center">
-     <em>Figura 12: Gráfica de valores silhouette para cada punto y el promedio general</em>
+     <em>Figura 15: Gráfica de valores silhouette para cada punto y el promedio general</em>
    </p>
 
    *Clustering - CLP vs SHAM - Días 2 y 4 - TOP 15 picos - Algoritmo: kmeans*
@@ -292,14 +291,14 @@ Resultados:
    <img src='Imagenes/4_kmeans_2_clusters_4_grupos.jpg' width='400'>
    </p>
    <p align="center">
-     <em>Figura 12: Clustering - CLP vs SHAM - Días 2 y 4 - TOP 15 picos - Algoritmo: kmeans</em>
+     <em>Figura 16: Clustering - CLP vs SHAM - Días 2 y 4 - TOP 15 picos - Algoritmo: kmeans</em>
    </p>
 
    <p align="center">
    <img src='Imagenes/4_acierto_4.jpg' width='400'>
    </p>
    <p align="center">
-     <em>Figura 12: Tasa de acierto por día</em>
+     <em>Figura 17: Tasa de acierto por grupo</em>
    </p>
    
    Matriz de confusión y métricas:
@@ -331,7 +330,7 @@ Resultados:
    <img src='Imagenes/4_silueta_4.jpg' width='400'>
    </p>
    <p align="center">
-     <em>Figura 12: Gráfica de valores silhouette para cada punto y el promedio general</em>
+     <em>Figura 18: Gráfica de valores silhouette para cada punto y el promedio general</em>
    </p>
 
    *Clustering - CLP vs SHAM - Días 2 y 4 - TOP 10 picos - Algoritmo: kmeans*
@@ -340,14 +339,14 @@ Resultados:
    <img src='Imagenes/4_kmeans_top10.jpg' width='400'>
    </p>
    <p align="center">
-     <em>Figura 13: Clustering - CLP vs SHAM - Días 2 y 4 - TOP 10 picos - Algoritmo: kmeans</em>
+     <em>Figura 19: Clustering - CLP vs SHAM - Días 2 y 4 - TOP 10 picos - Algoritmo: kmeans</em>
    </p>
 
    <p align="center">
    <img src='Imagenes/4_aciertos_5.jpg' width='400'>
    </p>
    <p align="center">
-     <em>Figura 12: Tasa de acierto por día</em>
+     <em>Figura 20: Tasa de acierto por grupo</em>
    </p>
    
    Matriz de confusión y métricas:
@@ -355,7 +354,7 @@ Resultados:
    | Referencia | cluster1 | cluster2 |
    |------------|----------|----------|
    | SHAM       | 46       | 0        |
-   | CLP        | 10        | 51       |
+   | CLP        | 10       | 51       |
 
    | Métrica    | Valor |
    |------------|-------|
@@ -379,7 +378,7 @@ Resultados:
    <img src='Imagenes/4_silueta_5.jpg' width='400'>
    </p>
    <p align="center">
-     <em>Figura 12: Gráfica de valores silhouette para cada punto y el promedio    general</em>
+     <em>Figura 21: Gráfica de valores silhouette para cada punto y el promedio general</em>
    </p>
 
    *Clustering - CLP vs SHAM - Días 2 y 4 - TOP 20 picos - Algoritmo: PAM*
@@ -388,14 +387,14 @@ Resultados:
    <img src='Imagenes/4_pam_2_clusters_4_grupos.jpg' width='400'>
    </p>
    <p align="center">
-     <em>Figura 14: Clustering - CLP vs SHAM - Días 2 y 4 - TOP 20 picos - Algoritmo: PAM</em>
+     <em>Figura 22: Clustering - CLP vs SHAM - Días 2 y 4 - TOP 20 picos - Algoritmo: PAM</em>
    </p>
 
    <p align="center">
    <img src='Imagenes/4_acierto_3.jpg' width='400'>
    </p>
    <p align="center">
-     <em>Figura 12: Tasa de acierto por día</em>
+     <em>Figura 23: Tasa de acierto por grupo</em>
    </p>
    
    Matriz de confusión y métricas:
@@ -427,7 +426,7 @@ Resultados:
    <img src='Imagenes/4_silueta_3.jpg' width='400'>
    </p>
    <p align="center">
-     <em>Figura 12: Gráfica de valores silhouette para cada punto y el promedio    general</em>
+     <em>Figura 24: Gráfica de valores silhouette para cada punto y el promedio general</em>
    </p>
 
    *Clustering - CLP vs SHAM - Días 2 y 4 - 3 clusters - TOP 20 picos - Algoritmo: PAM*
@@ -436,14 +435,14 @@ Resultados:
    <img src='Imagenes/4_pam_3_clusters_4_grupos.jpg' width='400'>
    </p>
    <p align="center">
-     <em>Figura 15: Clustering - CLP vs SHAM - Días 2 y 4 - 3 clusters - TOP 20 picos - Algoritmo: PAM</em>
+     <em>Figura 25: Clustering - CLP vs SHAM - Días 2 y 4 - 3 clusters - TOP 20 picos - Algoritmo: PAM</em>
    </p>
 
    <p align="center">
    <img src='Imagenes/4_silueta_3.jpg' width='400'>
    </p>
    <p align="center">
-     <em>Figura 12: Gráfica de valores silhouette para cada punto y el promedio    general</em>
+     <em>Figura 26: Gráfica de valores silhouette para cada punto y el promedio general</em>
    </p>
 
    | Cluster | Tamaño | Ancho promedio silueta  |
@@ -458,14 +457,14 @@ Resultados:
    <img src='Imagenes/4_pam_3_grupos_3_clusters.jpg' width='400'>
    </p>
    <p align="center">
-     <em>Figura 16: Clustering - CLP vs SHAM - Días 2 y 4 - 3 clusters - TOP 30 picos - Algoritmo: PAM</em>
+     <em>Figura 27: Clustering - CLP vs SHAM - Días 2 y 4 - 3 clusters - TOP 30 picos - Algoritmo: PAM</em>
    </p>
 
    <p align="center">
    <img src='Imagenes/4_silueta_7.jpg' width='400'>
    </p>
    <p align="center">
-     <em>Figura 12: Gráfica de valores silhouette para cada punto y el promedio    general</em>
+     <em>Figura 28: Gráfica de valores silhouette para cada punto y el promedio general</em>
    </p>
 
    | Cluster | Tamaño | Ancho promedio silueta  |
@@ -481,14 +480,14 @@ Resultados:
    <img src='Imagenes/4_pam_top10.jpg' width='400'>
    </p>
    <p align="center">
-     <em>Figura 17: Clustering - CLP vs SHAM - Días 2 y 4 - TOP 10 picos - Algoritmo: PAM</em>
+     <em>Figura 29: Clustering - CLP vs SHAM - Días 2 y 4 - TOP 10 picos - Algoritmo: PAM</em>
    </p>
 
    <p align="center">
    <img src='Imagenes/4_aciertos_6.jpg' width='400'>
    </p>
    <p align="center">
-     <em>Figura 12: Tasa de acierto por día</em>
+     <em>Figura 30: Tasa de acierto por grupo</em>
    </p>
    
    Matriz de confusión y métricas:
@@ -520,25 +519,29 @@ Resultados:
    <img src='Imagenes/4_silueta_6.jpg' width='400'>
    </p>
    <p align="center">
-     <em>Figura 12: Gráfica de valores silhouette para cada punto y el promedio    general</em>
+     <em>Figura 31: Gráfica de valores silhouette para cada punto y el promedio general</em>
    </p>
-
+   </details>
+   
    ### Archivo: 5_ns_m51_d24
 
+   <details>
+     <summary>Haz clic para expandir</summary>
+   
    <p align="center">
    <img src='Imagenes/5_picos.jpg' width='400'>
    </p>
    <p align="center">
-     <em>Figura 18:  Picos mas preponderantes seleccionados por el algoritmo bindaranking a partir del factor CLP_D2 vs CLP_D4 vs SHAM</em>
+     <em>Figura 32:  Picos mas preponderantes seleccionados por el algoritmo bindaranking a partir del factor CLP_D2 vs CLP_D4 vs SHAM</em>
    </p>
 
    <p align="center">
    <img src='Imagenes/5_pam_3clusters.jpg' width='400'>
    </p>
    <p align="center">
-     <em>Figura 19: Clustering - CLP_D2 vs CLP_D4 vs SHAM - TOP 15 picos - 3 CLUSTERS - Algoritmo: PAM</em>
+     <em>Figura 33: Clustering - CLP_D2 vs CLP_D4 vs SHAM - TOP 15 picos - 3 CLUSTERS - Algoritmo: PAM</em>
    </p>
-   
+   </details>
    
    ### Archivo: 6_ns_m51_vs_varios
 
