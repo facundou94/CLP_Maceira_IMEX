@@ -192,7 +192,8 @@ Resultados:
    </p>
 
    Métricas:
-
+   
+   <p align="center">
    | Cluster | Tamaño | Ancho promedio silueta  |
    |---------|--------|-------------------------|
    | 1       | 56     | 0.38                    |
@@ -203,12 +204,13 @@ Resultados:
    | VSP     | 0.34  |
    | WCSS    | 343   |
    | BCSS    | 216   |
+   </p>
    
    <p align="center">
    <img src='Imagenes/2_silueta.jpeg' width='400'>
    </p>
    <p align="center">
-     <em>Figura 10: Gráfica de valores silhouette para cada punto y el promedio general</em>
+     <em>Figura 11: Gráfica de valores silhouette para cada punto y el promedio general</em>
    </p>
 
    Matriz de confusión y métricas:
