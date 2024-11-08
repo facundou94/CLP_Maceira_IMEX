@@ -551,7 +551,7 @@ Resultados:
    
 
    <p align="center">
-   <img src='Imagenes/4_5_aciertos.jpg' width='400'>
+   <img src='Imagenes/4_5_aciertos.jpeg' width='400'>
    </p>
    <p align="center">
      <em>Figura 30: Tasa de acierto por grupo</em>
@@ -570,7 +570,7 @@ Resultados:
    | BCSS    | 92    |
 
    <p align="center">
-   <img src='Imagenes/4_5_silueta.jpg' width='400'>
+   <img src='Imagenes/4_5_silueta.jpeg' width='400'>
    </p>
    <p align="center">
      <em>Figura 30: Tasa de acierto por grupo</em>
@@ -777,6 +777,9 @@ Resultados:
 
 ## Algoritmos Supervisados
 
+<details>
+  <summary>Expandir</summary>
+   
    ### Archivo: 3_s_m122_d1247.R
 
    Se probaron modelos de aprendizaje supervisado con las 122 réplicas biológicas correspondiente a todos los días.
@@ -831,6 +834,8 @@ Resultados:
    <p align="center">
      <em>Figura 29:  Arbol de decisión del Random Forest</em>
    </p>
+
+</details>
 
 ## Conclusión
 
